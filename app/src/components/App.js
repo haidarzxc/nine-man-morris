@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import '../css/App.css';
 import {
-  Table,
   ListGroup,
   ListGroupItem,
   Image,
-  Grid,
   Row,
   Col} from "react-bootstrap"
 import board from '../images/board.png'
@@ -27,10 +25,22 @@ import inst15 from '../images/15.gif'
 import inst16 from '../images/16.gif'
 import inst17 from '../images/17.gif'
 import inst18 from '../images/18.gif'
-import inst19 from '../images/19.gif'
-import inst20 from '../images/20.gif'
+// import inst19 from '../images/19.gif'
+// import inst20 from '../images/20.gif'
 
 class App extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleInst = this.handleInst.bind(this);
+
+  }
+
+  handleInst(event){
+    console.log(event.target.id);
+  }
+
+
   render() {
     return (
 
@@ -57,30 +67,30 @@ class App extends Component {
 
             <ListGroupItem header="Player A">
 
-              <Image src={inst1}  width="10%"/>
-              <Image src={inst2}  width="10%"/>
-              <Image src={inst3}  width="10%"/>
-              <Image src={inst4}  width="10%"/>
-              <Image src={inst5}  width="10%"/>
-              <Image src={inst6}  width="10%"/>
-              <Image src={inst7}  width="10%"/>
-              <Image src={inst8}  width="10%"/>
-              <Image src={inst9}  width="10%"/>
+              <Image src={inst1}  width="10%" id="inst1" onClick={this.handleInst}/>
+              <Image src={inst2}  width="10%" id="inst2" onClick={this.handleInst}/>
+              <Image src={inst3}  width="10%" id="inst3" onClick={this.handleInst}/>
+              <Image src={inst4}  width="10%" id="inst4" onClick={this.handleInst}/>
+              <Image src={inst5}  width="10%" id="inst5" onClick={this.handleInst}/>
+              <Image src={inst6}  width="10%" id="inst6" onClick={this.handleInst}/>
+              <Image src={inst7}  width="10%" id="inst7" onClick={this.handleInst}/>
+              <Image src={inst8}  width="10%" id="inst8" onClick={this.handleInst}/>
+              <Image src={inst9}  width="10%" id="inst9" onClick={this.handleInst}/>
 
             </ListGroupItem>
 
 
           <ListGroupItem header="Player B">
 
-            <Image src={inst10}  width="10%"/>
-            <Image src={inst11}  width="10%"/>
-            <Image src={inst12}  width="10%"/>
-            <Image src={inst13}  width="10%"/>
-            <Image src={inst14}  width="10%"/>
-            <Image src={inst15}  width="10%"/>
-            <Image src={inst16}  width="10%"/>
-            <Image src={inst17}  width="10%"/>
-            <Image src={inst18}  width="10%"/>
+            <Image src={inst10}  width="10%" id="inst10" onClick={this.handleInst}/>
+            <Image src={inst11}  width="10%" id="inst11" onClick={this.handleInst}/>
+            <Image src={inst12}  width="10%" id="inst12" onClick={this.handleInst}/>
+            <Image src={inst13}  width="10%" id="inst13" onClick={this.handleInst}/>
+            <Image src={inst14}  width="10%" id="inst14" onClick={this.handleInst}/>
+            <Image src={inst15}  width="10%" id="inst15" onClick={this.handleInst}/>
+            <Image src={inst16}  width="10%" id="inst16" onClick={this.handleInst}/>
+            <Image src={inst17}  width="10%" id="inst17" onClick={this.handleInst}/>
+            <Image src={inst18}  width="10%" id="inst18" onClick={this.handleInst}/>
 
           </ListGroupItem>
 
