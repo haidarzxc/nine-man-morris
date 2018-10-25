@@ -38,10 +38,12 @@ class App extends Component {
     this.handleInst = this.handleInst.bind(this);
     this.handleViewLoc = this.handleViewLoc.bind(this);
     this.handleHideLoc = this.handleHideLoc.bind(this);
+    this.handleBoardInst = this.handleBoardInst.bind(this);
   }
 
   handleInst(event){
-    console.log(event.target.id);
+    this.props.dispatch({type: "SET_INST",inst:event.target.id})
+    this.props.dispatch({type: "HIGHLIGHT_MAN"})
   }
 
   handleViewLoc(event){
@@ -52,8 +54,15 @@ class App extends Component {
     this.props.dispatch({ type: 'HIDE_LOC' ,loc:event.target.id});
   }
 
+  handleBoardInst(event){
+    console.log(event.target.id);
+    console.log(this.props.App.inst);
+  }
+
 
   render() {
+
+
     return (
 
       <Row className="Row1">
@@ -68,15 +77,16 @@ class App extends Component {
 
 
             {/* Loc1A */}
-            <Image src={this.props.App.locs.Loc1A==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc1A===true? loc2:loc1}
                   width="8%"
                   id="Loc1A"
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+                  
 
             {/* Loc4A */}
-            <Image src={this.props.App.locs.Loc4A==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc4A===true? loc2:loc1}
                   width="8%"
                   id="Loc4A"
                   onMouseEnter={this.handleViewLoc}
@@ -84,7 +94,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
           {/* Loc7A */}
-          <Image src={this.props.App.locs.Loc7A==true? loc2:loc1}
+          <Image src={this.props.App.locs.Loc7A===true? loc2:loc1}
                 width="8%"
                 id="Loc7A"
                 onMouseEnter={this.handleViewLoc}
@@ -92,7 +102,7 @@ class App extends Component {
                 onClick={this.handleBoardInst}/>
 
             {/* Loc2B */}
-            <Image src={this.props.App.locs.Loc2B==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc2B===true? loc2:loc1}
                   width="8%"
                   id="Loc2B"
                   onMouseEnter={this.handleViewLoc}
@@ -100,7 +110,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc4B */}
-            <Image src={this.props.App.locs.Loc4B==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc4B===true? loc2:loc1}
                   width="8%"
                   id="Loc4B"
                   onMouseEnter={this.handleViewLoc}
@@ -108,7 +118,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc6B */}
-            <Image src={this.props.App.locs.Loc6B==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc6B===true? loc2:loc1}
                   width="8%"
                   id="Loc6B"
                   onMouseEnter={this.handleViewLoc}
@@ -116,7 +126,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc3C */}
-            <Image src={this.props.App.locs.Loc3C==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc3C===true? loc2:loc1}
                   width="8%"
                   id="Loc3C"
                   onMouseEnter={this.handleViewLoc}
@@ -124,7 +134,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc4C */}
-            <Image src={this.props.App.locs.Loc4C==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc4C===true? loc2:loc1}
                   width="8%"
                   id="Loc4C"
                   onMouseEnter={this.handleViewLoc}
@@ -132,7 +142,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc5C */}
-            <Image src={this.props.App.locs.Loc5C==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc5C===true? loc2:loc1}
                   width="8%"
                   id="Loc5C"
                   onMouseEnter={this.handleViewLoc}
@@ -140,7 +150,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc1D */}
-            <Image src={this.props.App.locs.Loc1D==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc1D===true? loc2:loc1}
                   width="8%"
                   id="Loc1D"
                   onMouseEnter={this.handleViewLoc}
@@ -148,7 +158,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc2D */}
-            <Image src={this.props.App.locs.Loc2D==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc2D===true? loc2:loc1}
                   width="8%"
                   id="Loc2D"
                   onMouseEnter={this.handleViewLoc}
@@ -156,7 +166,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc3D */}
-            <Image src={this.props.App.locs.Loc3D==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc3D===true? loc2:loc1}
                   width="8%"
                   id="Loc3D"
                   onMouseEnter={this.handleViewLoc}
@@ -164,7 +174,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc5D */}
-            <Image src={this.props.App.locs.Loc5D==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc5D===true? loc2:loc1}
                   width="8%"
                   id="Loc5D"
                   onMouseEnter={this.handleViewLoc}
@@ -172,7 +182,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc6D */}
-            <Image src={this.props.App.locs.Loc6D==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc6D===true? loc2:loc1}
                   width="8%"
                   id="Loc6D"
                   onMouseEnter={this.handleViewLoc}
@@ -180,7 +190,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc7D */}
-            <Image src={this.props.App.locs.Loc7D==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc7D===true? loc2:loc1}
                   width="8%"
                   id="Loc7D"
                   onMouseEnter={this.handleViewLoc}
@@ -188,7 +198,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc3E */}
-            <Image src={this.props.App.locs.Loc3E==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc3E===true? loc2:loc1}
                   width="8%"
                   id="Loc3E"
                   onMouseEnter={this.handleViewLoc}
@@ -196,7 +206,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc4E */}
-            <Image src={this.props.App.locs.Loc4E==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc4E===true? loc2:loc1}
                   width="8%"
                   id="Loc4E"
                   onMouseEnter={this.handleViewLoc}
@@ -204,7 +214,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc5E */}
-            <Image src={this.props.App.locs.Loc5E==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc5E===true? loc2:loc1}
                   width="8%"
                   id="Loc5E"
                   onMouseEnter={this.handleViewLoc}
@@ -212,7 +222,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc2F */}
-            <Image src={this.props.App.locs.Loc2F==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc2F===true? loc2:loc1}
                   width="8%"
                   id="Loc2F"
                   onMouseEnter={this.handleViewLoc}
@@ -220,7 +230,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc4F */}
-            <Image src={this.props.App.locs.Loc4F==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc4F===true? loc2:loc1}
                   width="8%"
                   id="Loc4F"
                   onMouseEnter={this.handleViewLoc}
@@ -228,7 +238,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc6F */}
-            <Image src={this.props.App.locs.Loc6F==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc6F===true? loc2:loc1}
                   width="8%"
                   id="Loc6F"
                   onMouseEnter={this.handleViewLoc}
@@ -236,7 +246,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc1G */}
-            <Image src={this.props.App.locs.Loc1G==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc1G===true? loc2:loc1}
                   width="8%"
                   id="Loc1G"
                   onMouseEnter={this.handleViewLoc}
@@ -244,7 +254,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc4G */}
-            <Image src={this.props.App.locs.Loc4G==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc4G===true? loc2:loc1}
                   width="8%"
                   id="Loc4G"
                   onMouseEnter={this.handleViewLoc}
@@ -252,7 +262,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
 
             {/* Loc7G */}
-            <Image src={this.props.App.locs.Loc7G==true? loc2:loc1}
+            <Image src={this.props.App.locs.Loc7G===true? loc2:loc1}
                   width="8%"
                   id="Loc7G"
                   onMouseEnter={this.handleViewLoc}
@@ -282,8 +292,8 @@ class App extends Component {
 
             <ListGroupItem header="Player A">
 
-              <Image src={inst1}  width="6%" id="inst1" onClick={this.handleInst}/>
-              <Image src={inst2}  width="10%" id="inst2" onClick={this.handleInst}/>
+              <Image src={inst1} className={this.props.App.highlightMan===true? "HighlightMan":null}  width="6%" id="inst1" onClick={this.handleInst}/>
+              <Image src={inst2} className={this.props.App.highlightMan===true? "HighlightMan":null}  width="10%" id="inst2" onClick={this.handleInst}/>
               <Image src={inst3}  width="10%" id="inst3" onClick={this.handleInst}/>
               <Image src={inst4}  width="14%" id="inst4" onClick={this.handleInst}/>
               <Image src={inst5}  width="10%" id="inst5" onClick={this.handleInst}/>

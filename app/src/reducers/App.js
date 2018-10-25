@@ -24,7 +24,31 @@ const initialState = {
     Loc1G:false,
     Loc4G:false,
     Loc7G:false
-  }
+  },
+
+  insts:{
+    inst1:null,
+    inst2:null,
+    inst3:null,
+    inst4:null,
+    inst5:null,
+    inst6:null,
+    inst7:null,
+    inst8:null,
+    inst9:null,
+    inst10:null,
+    inst11:null,
+    inst12:null,
+    inst13:null,
+    inst14:null,
+    inst15:null,
+    inst16:null,
+    inst17:null,
+    inst18:null
+  },
+
+  inst:null
+
 
 
 };
@@ -63,6 +87,20 @@ function App(state = initialState, action) {
       return {
         ...state,
         locs:setLoc(action.loc,state,"OFF")
+      };
+
+    case 'HIGHLIGHT_MAN':
+
+      return {
+        ...state
+
+      };
+
+    case 'SET_INST':
+
+      return {
+        ...state,
+        inst:action.inst
       };
 
     default:

@@ -31,10 +31,10 @@
     transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
 }
 
-.Man{
-  height: 35%;
-  width: 15%;
-  margin: 0px;
+
+
+.HighlightMan{
+  background-color: red;
 }
 
 #Loc1A{
