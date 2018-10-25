@@ -61,6 +61,8 @@ class App extends Component {
 
 
           <div id="div1">
+
+
             <Image src={board} responsive className="board"/>
 
 
@@ -73,6 +75,8 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+
+
 
             Loc4A
             Loc7A

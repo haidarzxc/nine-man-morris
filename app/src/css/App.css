@@ -19,9 +19,9 @@
 
 #div1 {
     position: relative;
-    height: 85%;
-    width: 85%;
-    margin-left: 60px;
+    /* height: 85%; */
+    width: 500px;
+    margin-left: 80px;
     perspective: 800px;
 }
 
@@ -40,8 +40,8 @@
 #Loc1A{
   transform-style: preserve-3d;
   transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
-  position: relative;
-  top: -15px;
-  left: 15px;
+  position: static;
+  margin-top: -112px;
+  margin-left: -22px;
 
 }
