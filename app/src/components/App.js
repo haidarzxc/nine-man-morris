@@ -6,6 +6,9 @@ import {
   Image,
   Row,
   Col} from "react-bootstrap"
+
+import { connect  } from 'react-redux';
+
 import board from '../images/board.png'
 import inst1 from '../images/1.gif'
 import inst2 from '../images/2.gif'
@@ -25,19 +28,28 @@ import inst15 from '../images/15.gif'
 import inst16 from '../images/16.gif'
 import inst17 from '../images/17.gif'
 import inst18 from '../images/18.gif'
-// import inst19 from '../images/19.gif'
-// import inst20 from '../images/20.gif'
+import loc2 from '../images/loc2.png'
+import loc1 from '../images/loc1.png'
 
 class App extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.handleInst = this.handleInst.bind(this);
-
+    this.handleViewLoc = this.handleViewLoc.bind(this);
+    this.handleHideLoc = this.handleHideLoc.bind(this);
   }
 
   handleInst(event){
     console.log(event.target.id);
+  }
+
+  handleViewLoc(event){
+    this.props.dispatch({ type: 'SHOW_LOC' ,loc:event.target.id});
+  }
+
+  handleHideLoc(event){
+    this.props.dispatch({ type: 'HIDE_LOC' ,loc:event.target.id});
   }
 
 
@@ -50,6 +62,48 @@ class App extends Component {
 
           <div id="div1">
             <Image src={board} responsive className="board"/>
+
+
+
+            {/* Loc1A */}
+
+            <Image src={this.props.App.locs.Loc1A==true? loc2:loc1}
+                  width="8%"
+                  id="Loc1A"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            Loc4A
+            Loc7A
+            Loc2B
+            Loc4B
+            Loc6B
+            Loc3C
+            Loc4C
+            Loc5C
+            Loc1D
+            Loc2D
+            Loc3D
+            Loc5D
+            Loc6D
+            Loc7D
+            Loc3E
+            Loc4E
+            Loc5E
+            Loc2F
+            Loc4F
+            Loc6F
+            Loc1G
+            Loc4G
+            Loc7G
+
+
+
+
+
+
+
           </div>
         </Col>
 
@@ -67,29 +121,29 @@ class App extends Component {
 
             <ListGroupItem header="Player A">
 
-              <Image src={inst1}  width="10%" id="inst1" onClick={this.handleInst}/>
+              <Image src={inst1}  width="6%" id="inst1" onClick={this.handleInst}/>
               <Image src={inst2}  width="10%" id="inst2" onClick={this.handleInst}/>
               <Image src={inst3}  width="10%" id="inst3" onClick={this.handleInst}/>
-              <Image src={inst4}  width="10%" id="inst4" onClick={this.handleInst}/>
+              <Image src={inst4}  width="14%" id="inst4" onClick={this.handleInst}/>
               <Image src={inst5}  width="10%" id="inst5" onClick={this.handleInst}/>
               <Image src={inst6}  width="10%" id="inst6" onClick={this.handleInst}/>
-              <Image src={inst7}  width="10%" id="inst7" onClick={this.handleInst}/>
-              <Image src={inst8}  width="10%" id="inst8" onClick={this.handleInst}/>
-              <Image src={inst9}  width="10%" id="inst9" onClick={this.handleInst}/>
+              <Image src={inst7}  width="14%" id="inst7" onClick={this.handleInst}/>
+              <Image src={inst8}  width="8%" id="inst8" onClick={this.handleInst}/>
+              <Image src={inst9}  width="12%" id="inst9" onClick={this.handleInst}/>
 
             </ListGroupItem>
 
 
           <ListGroupItem header="Player B">
 
-            <Image src={inst10}  width="10%" id="inst10" onClick={this.handleInst}/>
-            <Image src={inst11}  width="10%" id="inst11" onClick={this.handleInst}/>
-            <Image src={inst12}  width="10%" id="inst12" onClick={this.handleInst}/>
-            <Image src={inst13}  width="10%" id="inst13" onClick={this.handleInst}/>
-            <Image src={inst14}  width="10%" id="inst14" onClick={this.handleInst}/>
-            <Image src={inst15}  width="10%" id="inst15" onClick={this.handleInst}/>
-            <Image src={inst16}  width="10%" id="inst16" onClick={this.handleInst}/>
-            <Image src={inst17}  width="10%" id="inst17" onClick={this.handleInst}/>
+            <Image src={inst10}  width="14%" id="inst10" onClick={this.handleInst}/>
+            <Image src={inst11}  width="13%" id="inst11" onClick={this.handleInst}/>
+            <Image src={inst12}  width="13%" id="inst12" onClick={this.handleInst}/>
+            <Image src={inst13}  width="13%" id="inst13" onClick={this.handleInst}/>
+            <Image src={inst14}  width="8%" id="inst14" onClick={this.handleInst}/>
+            <Image src={inst15}  width="8%" id="inst15" onClick={this.handleInst}/>
+            <Image src={inst16}  width="8%" id="inst16" onClick={this.handleInst}/>
+            <Image src={inst17}  width="11%" id="inst17" onClick={this.handleInst}/>
             <Image src={inst18}  width="10%" id="inst18" onClick={this.handleInst}/>
 
           </ListGroupItem>
@@ -107,4 +161,10 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    App: state.App
+  };
+}//end of mapStateToProps
+
+export default connect(mapStateToProps)(App)
