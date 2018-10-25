@@ -40,8 +40,193 @@
 #Loc1A{
   transform-style: preserve-3d;
   transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
-  position: static;
-  margin-top: -112px;
-  margin-left: -22px;
+  position: relative;
+  top: -80px;
+  left: -84px;
 
 }
+
+#Loc4A{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+
+}
+
+#Loc7A{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -389px;
+  left: -50px;
+}
+
+#Loc2B{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -150px;
+  left: -88px;
+}
+
+ #Loc4B{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -99px;
+}
+
+#Loc6B{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -357px;
+  left: -116px;
+}
+
+#Loc3C{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -202px;
+  left: -122px;
+}
+
+#Loc4C{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -153px;
+}
+
+#Loc5C{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -326px;
+  left: -184px;
+}
+/*
+#Loc1D{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc2D{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc3D{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc5D{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc6D{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc7D{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc3E{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc4E{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc5E{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc2F{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc4F{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc6F{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc1G{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc4G{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+}
+
+#Loc7G{
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  position: relative;
+  top: -269px;
+  left: -54px;
+} */

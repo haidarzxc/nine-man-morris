@@ -68,7 +68,6 @@ class App extends Component {
 
 
             {/* Loc1A */}
-
             <Image src={this.props.App.locs.Loc1A==true? loc2:loc1}
                   width="8%"
                   id="Loc1A"
@@ -76,31 +75,189 @@ class App extends Component {
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
 
+            {/* Loc4A */}
+            <Image src={this.props.App.locs.Loc4A==true? loc2:loc1}
+                  width="8%"
+                  id="Loc4A"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
 
+          {/* Loc7A */}
+          <Image src={this.props.App.locs.Loc7A==true? loc2:loc1}
+                width="8%"
+                id="Loc7A"
+                onMouseEnter={this.handleViewLoc}
+                onMouseLeave={this.handleHideLoc}
+                onClick={this.handleBoardInst}/>
 
-            Loc4A
-            Loc7A
-            Loc2B
-            Loc4B
-            Loc6B
-            Loc3C
-            Loc4C
-            Loc5C
-            Loc1D
-            Loc2D
-            Loc3D
-            Loc5D
-            Loc6D
-            Loc7D
-            Loc3E
-            Loc4E
-            Loc5E
-            Loc2F
-            Loc4F
-            Loc6F
-            Loc1G
-            Loc4G
-            Loc7G
+            {/* Loc2B */}
+            <Image src={this.props.App.locs.Loc2B==true? loc2:loc1}
+                  width="8%"
+                  id="Loc2B"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc4B */}
+            <Image src={this.props.App.locs.Loc4B==true? loc2:loc1}
+                  width="8%"
+                  id="Loc4B"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc6B */}
+            <Image src={this.props.App.locs.Loc6B==true? loc2:loc1}
+                  width="8%"
+                  id="Loc6B"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc3C */}
+            <Image src={this.props.App.locs.Loc3C==true? loc2:loc1}
+                  width="8%"
+                  id="Loc3C"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc4C */}
+            <Image src={this.props.App.locs.Loc4C==true? loc2:loc1}
+                  width="8%"
+                  id="Loc4C"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc5C */}
+            <Image src={this.props.App.locs.Loc5C==true? loc2:loc1}
+                  width="8%"
+                  id="Loc5C"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc1D */}
+            <Image src={this.props.App.locs.Loc1D==true? loc2:loc1}
+                  width="8%"
+                  id="Loc1D"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc2D */}
+            <Image src={this.props.App.locs.Loc2D==true? loc2:loc1}
+                  width="8%"
+                  id="Loc2D"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc3D */}
+            <Image src={this.props.App.locs.Loc3D==true? loc2:loc1}
+                  width="8%"
+                  id="Loc3D"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc5D */}
+            <Image src={this.props.App.locs.Loc5D==true? loc2:loc1}
+                  width="8%"
+                  id="Loc5D"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc6D */}
+            <Image src={this.props.App.locs.Loc6D==true? loc2:loc1}
+                  width="8%"
+                  id="Loc6D"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc7D */}
+            <Image src={this.props.App.locs.Loc7D==true? loc2:loc1}
+                  width="8%"
+                  id="Loc7D"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc3E */}
+            <Image src={this.props.App.locs.Loc3E==true? loc2:loc1}
+                  width="8%"
+                  id="Loc3E"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc4E */}
+            <Image src={this.props.App.locs.Loc4E==true? loc2:loc1}
+                  width="8%"
+                  id="Loc4E"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc5E */}
+            <Image src={this.props.App.locs.Loc5E==true? loc2:loc1}
+                  width="8%"
+                  id="Loc5E"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc2F */}
+            <Image src={this.props.App.locs.Loc2F==true? loc2:loc1}
+                  width="8%"
+                  id="Loc2F"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc4F */}
+            <Image src={this.props.App.locs.Loc4F==true? loc2:loc1}
+                  width="8%"
+                  id="Loc4F"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc6F */}
+            <Image src={this.props.App.locs.Loc6F==true? loc2:loc1}
+                  width="8%"
+                  id="Loc6F"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc1G */}
+            <Image src={this.props.App.locs.Loc1G==true? loc2:loc1}
+                  width="8%"
+                  id="Loc1G"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc4G */}
+            <Image src={this.props.App.locs.Loc4G==true? loc2:loc1}
+                  width="8%"
+                  id="Loc4G"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
+
+            {/* Loc7G */}
+            <Image src={this.props.App.locs.Loc7G==true? loc2:loc1}
+                  width="8%"
+                  id="Loc7G"
+                  onMouseEnter={this.handleViewLoc}
+                  onMouseLeave={this.handleHideLoc}
+                  onClick={this.handleBoardInst}/>
 
 
 
