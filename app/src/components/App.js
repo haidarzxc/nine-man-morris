@@ -5,7 +5,8 @@ import {
   ListGroupItem,
   Image,
   Row,
-  Col} from "react-bootstrap"
+  Col,
+  Button} from "react-bootstrap"
 
 import { connect  } from 'react-redux';
 
@@ -31,6 +32,36 @@ import inst18 from '../images/18.gif'
 import loc2 from '../images/loc2.png'
 import loc1 from '../images/loc1.png'
 
+function isInst(player,inst){
+  if(player===0){
+    if(inst==="inst1" ||
+      inst==="inst2" ||
+      inst==="inst3" ||
+      inst==="inst4" ||
+      inst==="inst5" ||
+      inst==="inst6" ||
+      inst==="inst7" ||
+      inst==="inst8" ||
+      inst==="inst9"){
+        return true
+    }
+  }
+  else if(player===1){
+    if(inst==="inst10" ||
+      inst==="inst11" ||
+      inst==="inst12" ||
+      inst==="inst13" ||
+      inst==="inst14" ||
+      inst==="inst15" ||
+      inst==="inst16" ||
+      inst==="inst17" ||
+      inst==="inst18"){
+        return true
+    }
+  }
+  return false
+}
+
 class App extends Component {
   constructor(props, context) {
     super(props, context);
@@ -40,13 +71,23 @@ class App extends Component {
     this.handleHideLoc = this.handleHideLoc.bind(this);
     this.handleBoardInst = this.handleBoardInst.bind(this);
     this.resolveImage=this.resolveImage.bind(this);
+    this.HandleGameStart=this.HandleGameStart.bind(this);
 
 
   }
 
+
+
   handleInst(event){
-    this.props.dispatch({type: "SET_INST",inst:event.target.id})
-    this.props.dispatch({type: "HIGHLIGHT_MAN",inst:event.target.id})
+    if(this.props.App.turn===0 && isInst(0,event.target.id)){
+      this.props.dispatch({type: "SET_INST",inst:event.target.id})
+      this.props.dispatch({type: "HIGHLIGHT_MAN",inst:event.target.id})
+    }
+    else if(this.props.App.turn===1 && isInst(1,event.target.id)){
+      this.props.dispatch({type: "SET_INST",inst:event.target.id})
+      this.props.dispatch({type: "HIGHLIGHT_MAN",inst:event.target.id})
+    }
+
   }
 
   handleViewLoc(event){
@@ -59,8 +100,8 @@ class App extends Component {
 
   handleBoardInst(event){
     if(this.props.App.inst!==null){
-      console.log(event.target.id);
-      console.log(this.props.App.inst);
+      // console.log(event.target.id);
+      // console.log(this.props.App.inst);
       this.props.dispatch({ type: 'RENDER_INST' ,loc:event.target.id,inst:this.props.App.inst});
       try{
         document.getElementById(this.props.App.inst).remove()
@@ -68,9 +109,30 @@ class App extends Component {
       catch(err){
       }
 
+      if(this.props.App.turn===0){
+        this.props.dispatch({ type: 'SET_TURN',val:1});
+        this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
+        this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
+      }
+      else if(this.props.App.turn===1){
+        this.props.dispatch({ type: 'SET_TURN',val:0});
+        this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
+        this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
+      }
     }
+  }
 
-
+  HandleGameStart(evt){
+    let rand=Math.floor(Math.random() * (2 - 0) );
+    this.props.dispatch({ type: 'SET_TURN',val:rand});
+    if(rand===0){
+      this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
+      this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
+    }
+    else if(rand===1){
+      this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
+      this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
+    }
   }
 
   resolveImage(inst){
@@ -156,7 +218,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc1A?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc1A)}
-                className="instHolder"
+                className={this.props.App.turn===0 ?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc1A].width}
                 id="instHolder1"/>
               :
@@ -172,7 +234,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc4A?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc4A)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc4A].width}
                 id="instHolder2"/>
               :
@@ -188,7 +250,7 @@ class App extends Component {
                 onClick={this.handleBoardInst}/>
           {this.props.App.instHolders.Loc7A?
             <Image src={this.resolveImage(this.props.App.instHolders.Loc7A)}
-              className="instHolder"
+              className={this.props.App.turn===0?"instHolderB":"instHolderA"}
               width={this.props.App.insts[this.props.App.instHolders.Loc7A].width}
               id="instHolder3"/>
             :
@@ -204,7 +266,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc2B?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc2B)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc2B].width}
                 id="instHolder4"/>
               :
@@ -220,7 +282,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
           {this.props.App.instHolders.Loc4B?
             <Image src={this.resolveImage(this.props.App.instHolders.Loc4B)}
-              className="instHolder"
+              className={this.props.App.turn===0?"instHolderB":"instHolderA"}
               width={this.props.App.insts[this.props.App.instHolders.Loc4B].width}
               id="instHolder5"/>
             :
@@ -236,7 +298,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
           {this.props.App.instHolders.Loc6B?
             <Image src={this.resolveImage(this.props.App.instHolders.Loc6B)}
-              className="instHolder"
+              className={this.props.App.turn===0?"instHolderB":"instHolderA"}
               width={this.props.App.insts[this.props.App.instHolders.Loc6B].width}
               id="instHolder6"/>
             :
@@ -252,7 +314,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc3C?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc3C)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc3C].width}
                 id="instHolder7"/>
               :
@@ -268,7 +330,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc4C?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc4C)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc4C].width}
                 id="instHolder8"/>
               :
@@ -284,7 +346,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
           {this.props.App.instHolders.Loc5C?
             <Image src={this.resolveImage(this.props.App.instHolders.Loc5C)}
-              className="instHolder"
+              className={this.props.App.turn===0?"instHolderB":"instHolderA"}
               width={this.props.App.insts[this.props.App.instHolders.Loc5C].width}
               id="instHolder9"/>
             :
@@ -300,7 +362,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
           {this.props.App.instHolders.Loc1D?
             <Image src={this.resolveImage(this.props.App.instHolders.Loc1D)}
-              className="instHolder"
+              className={this.props.App.turn===0?"instHolderB":"instHolderA"}
               width={this.props.App.insts[this.props.App.instHolders.Loc1D].width}
               id="instHolder10"/>
             :
@@ -316,7 +378,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc2D?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc2D)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc2D].width}
                 id="instHolder11"/>
               :
@@ -332,7 +394,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc3D?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc3D)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc3D].width}
                 id="instHolder12"/>
               :
@@ -348,7 +410,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
           {this.props.App.instHolders.Loc5D?
             <Image src={this.resolveImage(this.props.App.instHolders.Loc5D)}
-              className="instHolder"
+              className={this.props.App.turn===0?"instHolderB":"instHolderA"}
               width={this.props.App.insts[this.props.App.instHolders.Loc5D].width}
               id="instHolder13"/>
             :
@@ -364,7 +426,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc6D?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc6D)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc6D].width}
                 id="instHolder14"/>
               :
@@ -380,7 +442,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc7D?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc7D)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc7D].width}
                 id="instHolder15"/>
               :
@@ -396,7 +458,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
           {this.props.App.instHolders.Loc3E?
             <Image src={this.resolveImage(this.props.App.instHolders.Loc3E)}
-              className="instHolder"
+              className={this.props.App.turn===0?"instHolderB":"instHolderA"}
               width={this.props.App.insts[this.props.App.instHolders.Loc3E].width}
               id="instHolder16"/>
             :
@@ -412,7 +474,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc4E?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc4E)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc4E].width}
                 id="instHolder17"/>
               :
@@ -428,7 +490,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
           {this.props.App.instHolders.Loc5E?
             <Image src={this.resolveImage(this.props.App.instHolders.Loc5E)}
-              className="instHolder"
+              className={this.props.App.turn===0?"instHolderB":"instHolderA"}
               width={this.props.App.insts[this.props.App.instHolders.Loc5E].width}
               id="instHolder18"/>
             :
@@ -444,7 +506,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc2F?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc2F)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc2F].width}
                 id="instHolder19"/>
               :
@@ -460,7 +522,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc4F?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc4F)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc4F].width}
                 id="instHolder20"/>
               :
@@ -476,7 +538,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc6F?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc6F)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc6F].width}
                 id="instHolder21"/>
               :
@@ -492,7 +554,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc1G?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc1G)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc1G].width}
                 id="instHolder22"/>
               :
@@ -508,7 +570,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
             {this.props.App.instHolders.Loc4G?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc4G)}
-                className="instHolder"
+                className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                 width={this.props.App.insts[this.props.App.instHolders.Loc4G].width}
                 id="instHolder23"/>
               :
@@ -524,7 +586,7 @@ class App extends Component {
                   onClick={this.handleBoardInst}/>
               {this.props.App.instHolders.Loc7G?
                 <Image src={this.resolveImage(this.props.App.instHolders.Loc7G)}
-                  className="instHolder"
+                  className={this.props.App.turn===0?"instHolderB":"instHolderA"}
                   width={this.props.App.insts[this.props.App.instHolders.Loc7G].width}
                   id="instHolder24"/>
                 :
@@ -545,6 +607,7 @@ class App extends Component {
         <ListGroup>
 
             <ListGroupItem header="Game Status." bsStyle="danger">
+            <Button bsStyle="primary" onClick={this.HandleGameStart}>Start Game</Button>
             Mode:
             won:
             lost:
@@ -552,7 +615,7 @@ class App extends Component {
 
             </ListGroupItem>
 
-            <ListGroupItem header="Player A">
+            <ListGroupItem className={this.props.App.highlightPA? "highlightPAON":"highlightPAOFF"} header="Player A">
 
               <Image src={inst1} className={this.props.App.highlightInst==="inst1"? "HighlightInst":null}  width="6%" id="inst1" onClick={this.handleInst}/>
               <Image src={inst2} className={this.props.App.highlightInst==="inst2"? "HighlightInst":null}  width="10%" id="inst2" onClick={this.handleInst}/>
@@ -567,7 +630,7 @@ class App extends Component {
             </ListGroupItem>
 
 
-          <ListGroupItem header="Player B">
+          <ListGroupItem className={this.props.App.highlightPB? "highlightPBON":"highlightPBOFF"} header="Player B">
 
             <Image src={inst10} className={this.props.App.highlightInst==="inst10"? "HighlightInst":null}  width="14%" id="inst10" onClick={this.handleInst}/>
             <Image src={inst11} className={this.props.App.highlightInst==="inst11"? "HighlightInst":null} width="13%" id="inst11" onClick={this.handleInst}/>

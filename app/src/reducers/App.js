@@ -124,6 +124,9 @@ const initialState = {
   inst:null,
   highlightInst:null,
   hideInst:null,
+  highlightPA:null,
+  highlightPB:null,
+  turn:null,
 
   instHolders:{
     Loc1A:false,
@@ -194,6 +197,30 @@ function App(state = initialState, action) {
       return {
         ...state,
         locs:setLoc(action.loc,state,"ON")
+
+      };
+
+    case 'HIGHLIGHT_PA':
+
+      return {
+        ...state,
+        highlightPA:action.val
+
+      };
+
+    case 'HIGHLIGHT_PB':
+
+      return {
+        ...state,
+        highlightPB:action.val
+
+      };
+
+    case 'SET_TURN':
+
+      return {
+        ...state,
+        turn:action.val
 
       };
 

@@ -329,7 +329,52 @@
 }
 /**/
 
-.instHolder{
+.instHolderA{
   position: absolute;
   z-index:1;
+  border-bottom-style: solid;
+  border-width: 2px;
+  border-color: red;
+  border-radius: 5px;
+}
+
+.instHolderB{
+  position: absolute;
+  z-index:1;
+  border-bottom-style: solid;
+  border-width: 2px;
+  border-color: blue;
+  border-radius: 5px;
+}
+
+.instHolderA:hover{
+  position: absolute;
+  z-index:1;
+  border-style: solid;
+  border-width: 2px;
+  border-color: red;
+  border-radius: 5px;
+}
+
+.instHolderB:hover{
+  position: absolute;
+  z-index:1;
+  border-style: solid;
+  border-width: 2px;
+  border-color: blue;
+  border-radius: 5px;
+}
+
+.highlightPAON{
+  background-color: #ac4545;
+}
+.highlightPAOFF{
+  background-color: white;
+}
+
+.highlightPBON{
+  background-color: #394a9f;
+}
+.highlightPBOFF{
+  background-color: white;
 }
