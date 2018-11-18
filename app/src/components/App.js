@@ -102,6 +102,7 @@ class App extends Component {
     if(this.props.App.inst!==null){
       // console.log(event.target.id);
       // console.log(this.props.App.inst);
+      console.log(this.props.App.instHolders);
       this.props.dispatch({ type: 'RENDER_INST' ,loc:event.target.id,inst:this.props.App.inst});
       try{
         document.getElementById(this.props.App.inst).remove()
@@ -215,7 +216,7 @@ class App extends Component {
                   id="Loc1A"
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
-                  onClick={this.handleBoardInst}/>
+                  onClick={this.props.App.instHolders.Loc1A===false? this.handleBoardInst : null}/>
             {this.props.App.instHolders.Loc1A?
               <Image src={this.resolveImage(this.props.App.instHolders.Loc1A)}
                 className={this.props.App.turn===0 ?"instHolderB":"instHolderA"}
