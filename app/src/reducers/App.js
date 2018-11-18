@@ -27,6 +27,32 @@ const initialState = {
     Loc4G:false,
     Loc7G:false
   },
+  placeHolder:{
+    Loc1A:"instHolder1",
+    Loc4A:"instHolder2",
+    Loc7A:"instHolder3",
+    Loc2B:"instHolder4",
+    Loc4B:"instHolder5",
+    Loc6B:"instHolder6",
+    Loc3C:"instHolder7",
+    Loc4C:"instHolder8",
+    Loc5C:"instHolder9",
+    Loc1D:"instHolder10",
+    Loc2D:"instHolder11",
+    Loc3D:"instHolder12",
+    Loc5D:"instHolder13",
+    Loc6D:"instHolder14",
+    Loc7D:"instHolder15",
+    Loc3E:"instHolder16",
+    Loc4E:"instHolder17",
+    Loc5E:"instHolder18",
+    Loc2F:"instHolder19",
+    Loc4F:"instHolder20",
+    Loc6F:"instHolder21",
+    Loc1G:"instHolder22",
+    Loc4G:"instHolder23",
+    Loc7G:"instHolder24"
+  },
 
   insts:{
     inst1:{
