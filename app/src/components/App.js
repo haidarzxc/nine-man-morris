@@ -163,7 +163,9 @@ class App extends Component {
   render() {
     let content=[]
     let c=0
+
     for(var loc in this.props.App.locs){
+      console.log();
       c++
       content.push(
         <Image key={c} src={this.props.App.locs[loc]===true? loc2:loc1}
@@ -180,8 +182,8 @@ class App extends Component {
            content.push(
                 <Image key={c} src={this.resolveImage(
                            this.props.App.instHolders[loc])}
-                  className={this.props.App.turn===0 ?
-                             "instHolderB":"instHolderA"}
+                  className={isInst(0,this.props.App.instHolders[loc])?
+                             "instHolderA":"instHolderB"}
                   width={this.props.App.insts[this.props.App.instHolders[loc]].width}
                   id={this.props.App.placeHolder[loc]}/>
 
