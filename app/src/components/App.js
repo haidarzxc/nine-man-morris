@@ -120,6 +120,7 @@ class App extends Component {
         this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
         this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
       }
+      this.props.dispatch({type: "SET_INST",inst:null})
     }
   }
 
