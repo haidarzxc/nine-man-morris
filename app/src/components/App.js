@@ -43,7 +43,7 @@ class App extends Component {
 
   handleInst(event){
     this.props.dispatch({type: "SET_INST",inst:event.target.id})
-    this.props.dispatch({type: "HIGHLIGHT_MAN"})
+    this.props.dispatch({type: "HIGHLIGHT_MAN",inst:event.target.id})
   }
 
   handleViewLoc(event){
@@ -83,7 +83,7 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
-                  
+
 
             {/* Loc4A */}
             <Image src={this.props.App.locs.Loc4A===true? loc2:loc1}
@@ -292,30 +292,30 @@ class App extends Component {
 
             <ListGroupItem header="Player A">
 
-              <Image src={inst1} className={this.props.App.highlightMan===true? "HighlightMan":null}  width="6%" id="inst1" onClick={this.handleInst}/>
-              <Image src={inst2} className={this.props.App.highlightMan===true? "HighlightMan":null}  width="10%" id="inst2" onClick={this.handleInst}/>
-              <Image src={inst3}  width="10%" id="inst3" onClick={this.handleInst}/>
-              <Image src={inst4}  width="14%" id="inst4" onClick={this.handleInst}/>
-              <Image src={inst5}  width="10%" id="inst5" onClick={this.handleInst}/>
-              <Image src={inst6}  width="10%" id="inst6" onClick={this.handleInst}/>
-              <Image src={inst7}  width="14%" id="inst7" onClick={this.handleInst}/>
-              <Image src={inst8}  width="8%" id="inst8" onClick={this.handleInst}/>
-              <Image src={inst9}  width="12%" id="inst9" onClick={this.handleInst}/>
+              <Image src={inst1} className={this.props.App.highlightInst==="inst1"? "HighlightInst":null}  width="6%" id="inst1" onClick={this.handleInst}/>
+              <Image src={inst2} className={this.props.App.highlightInst==="inst2"? "HighlightInst":null}  width="10%" id="inst2" onClick={this.handleInst}/>
+              <Image src={inst3} className={this.props.App.highlightInst==="inst3"? "HighlightInst":null}  width="10%" id="inst3" onClick={this.handleInst}/>
+              <Image src={inst4} className={this.props.App.highlightInst==="inst4"? "HighlightInst":null} width="14%" id="inst4" onClick={this.handleInst}/>
+              <Image src={inst5} className={this.props.App.highlightInst==="inst5"? "HighlightInst":null} width="10%" id="inst5" onClick={this.handleInst}/>
+              <Image src={inst6} className={this.props.App.highlightInst==="inst6"? "HighlightInst":null} width="10%" id="inst6" onClick={this.handleInst}/>
+              <Image src={inst7} className={this.props.App.highlightInst==="inst7"? "HighlightInst":null} width="14%" id="inst7" onClick={this.handleInst}/>
+              <Image src={inst8} className={this.props.App.highlightInst==="inst8"? "HighlightInst":null} width="8%" id="inst8" onClick={this.handleInst}/>
+              <Image src={inst9} className={this.props.App.highlightInst==="inst9"? "HighlightInst":null} width="12%" id="inst9" onClick={this.handleInst}/>
 
             </ListGroupItem>
 
 
           <ListGroupItem header="Player B">
 
-            <Image src={inst10}  width="14%" id="inst10" onClick={this.handleInst}/>
-            <Image src={inst11}  width="13%" id="inst11" onClick={this.handleInst}/>
-            <Image src={inst12}  width="13%" id="inst12" onClick={this.handleInst}/>
-            <Image src={inst13}  width="13%" id="inst13" onClick={this.handleInst}/>
-            <Image src={inst14}  width="8%" id="inst14" onClick={this.handleInst}/>
-            <Image src={inst15}  width="8%" id="inst15" onClick={this.handleInst}/>
-            <Image src={inst16}  width="8%" id="inst16" onClick={this.handleInst}/>
-            <Image src={inst17}  width="11%" id="inst17" onClick={this.handleInst}/>
-            <Image src={inst18}  width="10%" id="inst18" onClick={this.handleInst}/>
+            <Image src={inst10} className={this.props.App.highlightInst==="inst10"? "HighlightInst":null}  width="14%" id="inst10" onClick={this.handleInst}/>
+            <Image src={inst11} className={this.props.App.highlightInst==="inst11"? "HighlightInst":null} width="13%" id="inst11" onClick={this.handleInst}/>
+            <Image src={inst12} className={this.props.App.highlightInst==="inst12"? "HighlightInst":null} width="13%" id="inst12" onClick={this.handleInst}/>
+            <Image src={inst13} className={this.props.App.highlightInst==="inst13"? "HighlightInst":null} width="13%" id="inst13" onClick={this.handleInst}/>
+            <Image src={inst14} className={this.props.App.highlightInst==="inst14"? "HighlightInst":null} width="8%" id="inst14" onClick={this.handleInst}/>
+            <Image src={inst15} className={this.props.App.highlightInst==="inst15"? "HighlightInst":null} width="8%" id="inst15" onClick={this.handleInst}/>
+            <Image src={inst16} className={this.props.App.highlightInst==="inst16"? "HighlightInst":null} width="8%" id="inst16" onClick={this.handleInst}/>
+            <Image src={inst17} className={this.props.App.highlightInst==="inst17"? "HighlightInst":null} width="11%" id="inst17" onClick={this.handleInst}/>
+            <Image src={inst18} className={this.props.App.highlightInst==="inst18"? "HighlightInst":null} width="10%" id="inst18" onClick={this.handleInst}/>
 
           </ListGroupItem>
 

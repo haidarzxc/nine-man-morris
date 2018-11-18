@@ -47,7 +47,8 @@ const initialState = {
     inst18:null
   },
 
-  inst:null
+  inst:null,
+  highlightInst:null
 
 
 
@@ -92,8 +93,8 @@ function App(state = initialState, action) {
     case 'HIGHLIGHT_MAN':
 
       return {
-        ...state
-
+        ...state,
+        highlightInst:action.inst
       };
 
     case 'SET_INST':
