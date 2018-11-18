@@ -34,7 +34,6 @@
 
 
 .HighlightInst{
-  /* background-color: red; */
   border-radius: 8px;
   border-style: solid;
   border-color: red;
@@ -47,7 +46,10 @@
   position: relative;
   top: -80px;
   left: -84px;
-
+}
+#instHolder1{
+  top:394px;
+  left: -79px;
 }
 
 #Loc4A{
@@ -56,7 +58,10 @@
   position: relative;
   top: -269px;
   left: -54px;
-
+}
+#instHolder2{
+  top:206px;
+  left: -9px;
 }
 
 #Loc7A{
@@ -66,6 +71,10 @@
   top: -389px;
   left: -50px;
 }
+#instHolder3{
+  top:86px;
+  left: 35px;
+}
 
 #Loc2B{
   transform-style: preserve-3d;
@@ -73,6 +82,10 @@
   position: relative;
   top: -150px;
   left: -88px;
+}
+#instHolder4{
+  top:325px;
+  left: 36px;
 }
 
  #Loc4B{
@@ -82,6 +95,10 @@
   top: -269px;
   left: -99px;
 }
+#instHolder5{
+  top:206px;
+  left: 67px;
+}
 
 #Loc6B{
   transform-style: preserve-3d;
@@ -89,6 +106,10 @@
   position: relative;
   top: -357px;
   left: -116px;
+}
+#instHolder6{
+  top:120px;
+  left: 90px;
 }
 
 #Loc3C{
@@ -98,6 +119,10 @@
   top: -202px;
   left: -122px;
 }
+#instHolder7{
+  top:274px;
+  left: 123px;
+}
 
 #Loc4C{
   transform-style: preserve-3d;
@@ -105,6 +130,10 @@
   position: relative;
   top: -269px;
   left: -153px;
+}
+#instHolder8{
+  top:207px;
+  left: 133px;
 }
 
 #Loc5C{
@@ -114,6 +143,10 @@
   top: -326px;
   left: -184px;
 }
+#instHolder9{
+  top:149px;
+  left: 142px;
+}
 
 #Loc1D{
   transform-style: preserve-3d;
@@ -121,6 +154,10 @@
   position: relative;
   top: -79px;
   left: -131px;
+}
+#instHolder10{
+  top:397px;
+  left: 236px;
 }
 
 #Loc2D{
@@ -130,6 +167,10 @@
   top: -149px;
   left: -171px;
 }
+#instHolder11{
+  top:328px;
+  left: 238px;
+}
 
 #Loc3D{
   transform-style: preserve-3d;
@@ -137,6 +178,10 @@
   position: relative;
   top: -201px;
   left: -211px;
+}
+#instHolder12{
+  top:273px;
+  left: 232px;
 }
 
 #Loc5D{
@@ -146,6 +191,10 @@
   top: -367px;
   left: 229px;
 }
+#instHolder13{
+  top:149px;
+  left: 214px;
+}
 
 #Loc6D{
   transform-style: preserve-3d;
@@ -153,6 +202,10 @@
   position: relative;
   top: -397px;
   left: 189px;
+}
+#instHolder14{
+  top:121px;
+  left: 256px;
 }
 
 #Loc7D{
@@ -162,6 +215,10 @@
   top: -427px;
   left: 149px;
 }
+#instHolder15{
+  top:87px;
+  left: 220px;
+}
 
 #Loc3E{
   transform-style: preserve-3d;
@@ -169,6 +226,10 @@
   position: relative;
   top: -242px;
   left: 223px;
+}
+#instHolder16{
+  top:272px;
+  left: 349px;
 }
 
 #Loc4E{
@@ -178,6 +239,10 @@
   top: -309px;
   left: 172px;
 }
+#instHolder17{
+  top:207px;
+  left: 338px;
+}
 
 #Loc5E{
   transform-style: preserve-3d;
@@ -185,6 +250,10 @@
   position: relative;
   top: -366px;
   left: 123px;
+}
+#instHolder18{
+  top:151px;
+  left: 330px;
 }
 
 #Loc2F{
@@ -194,6 +263,10 @@
   top: -190px;
   left: 188px;
 }
+#instHolder19{
+  top:327px;
+  left: 435px;
+}
 
 #Loc4F{
   transform-style: preserve-3d;
@@ -201,6 +274,10 @@
   position: relative;
   top: -309px;
   left: 117px;
+}
+#instHolder20{
+  top:206px;
+  left: 404px;
 }
 
 #Loc6F{
@@ -210,6 +287,10 @@
   top: -396px;
   left: 55px;
 }
+#instHolder21{
+  top:119px;
+  left: 381px;
+}
 
 #Loc1G{
   transform-style: preserve-3d;
@@ -217,6 +298,10 @@
   position: relative;
   top: -120px;
   left: 185px;
+}
+#instHolder22{
+  top:399px;
+  left: 553px;
 }
 
 #Loc4G{
@@ -226,6 +311,10 @@
   top: -309px;
   left: 72px;
 }
+#instHolder23{
+  top:207px;
+  left: 480px;
+}
 
 #Loc7G{
   transform-style: preserve-3d;
@@ -234,4 +323,13 @@
   top: -429px;
   left: -13px;
 }
+#instHolder24{
+  top:88px;
+  left: 432px;
+}
 /**/
+
+.instHolder{
+  position: absolute;
+  z-index:1;
+}

@@ -39,6 +39,9 @@ class App extends Component {
     this.handleViewLoc = this.handleViewLoc.bind(this);
     this.handleHideLoc = this.handleHideLoc.bind(this);
     this.handleBoardInst = this.handleBoardInst.bind(this);
+    this.resolveImage=this.resolveImage.bind(this);
+
+
   }
 
   handleInst(event){
@@ -55,14 +58,82 @@ class App extends Component {
   }
 
   handleBoardInst(event){
-    console.log(event.target.id);
-    console.log(this.props.App.inst);
+    if(this.props.App.inst!==null){
+      console.log(event.target.id);
+      console.log(this.props.App.inst);
+      this.props.dispatch({ type: 'RENDER_INST' ,loc:event.target.id,inst:this.props.App.inst});
+      try{
+        document.getElementById(this.props.App.inst).remove()
+      }
+      catch(err){
+      }
+
+    }
+
+
+  }
+
+  resolveImage(inst){
+    if(inst==="inst1"){
+      return inst1
+    }
+    else if(inst==="inst2"){
+      return inst2
+    }
+    else if(inst==="inst3"){
+      return inst3
+    }
+    else if(inst==="inst4"){
+      return inst4
+    }
+    else if(inst==="inst5"){
+      return inst5
+    }
+    else if(inst==="inst6"){
+      return inst6
+    }
+    else if(inst==="inst7"){
+      return inst7
+    }
+    else if(inst==="inst8"){
+      return inst8
+    }
+    else if(inst==="inst9"){
+      return inst9
+    }
+    else if(inst==="inst10"){
+      return inst10
+    }
+    else if(inst==="inst11"){
+      return inst11
+    }
+    else if(inst==="inst12"){
+      return inst12
+    }
+    else if(inst==="inst13"){
+      return inst13
+    }
+    else if(inst==="inst14"){
+      return inst14
+    }
+    else if(inst==="inst15"){
+      return inst15
+    }
+    else if(inst==="inst16"){
+      return inst16
+    }
+    else if(inst==="inst17"){
+      return inst17
+    }
+    else if(inst==="inst18"){
+      return inst18
+    }
   }
 
 
+
+
   render() {
-
-
     return (
 
       <Row className="Row1">
@@ -83,7 +154,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
-
+            {this.props.App.instHolders.Loc1A?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc1A)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc1A].width}
+                id="instHolder1"/>
+              :
+              null
+            }
 
             {/* Loc4A */}
             <Image src={this.props.App.locs.Loc4A===true? loc2:loc1}
@@ -92,6 +170,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc4A?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc4A)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc4A].width}
+                id="instHolder2"/>
+              :
+              null
+            }
 
           {/* Loc7A */}
           <Image src={this.props.App.locs.Loc7A===true? loc2:loc1}
@@ -100,6 +186,14 @@ class App extends Component {
                 onMouseEnter={this.handleViewLoc}
                 onMouseLeave={this.handleHideLoc}
                 onClick={this.handleBoardInst}/>
+          {this.props.App.instHolders.Loc7A?
+            <Image src={this.resolveImage(this.props.App.instHolders.Loc7A)}
+              className="instHolder"
+              width={this.props.App.insts[this.props.App.instHolders.Loc7A].width}
+              id="instHolder3"/>
+            :
+            null
+          }
 
             {/* Loc2B */}
             <Image src={this.props.App.locs.Loc2B===true? loc2:loc1}
@@ -108,6 +202,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc2B?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc2B)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc2B].width}
+                id="instHolder4"/>
+              :
+              null
+            }
 
             {/* Loc4B */}
             <Image src={this.props.App.locs.Loc4B===true? loc2:loc1}
@@ -116,6 +218,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+          {this.props.App.instHolders.Loc4B?
+            <Image src={this.resolveImage(this.props.App.instHolders.Loc4B)}
+              className="instHolder"
+              width={this.props.App.insts[this.props.App.instHolders.Loc4B].width}
+              id="instHolder5"/>
+            :
+            null
+          }
 
             {/* Loc6B */}
             <Image src={this.props.App.locs.Loc6B===true? loc2:loc1}
@@ -124,6 +234,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+          {this.props.App.instHolders.Loc6B?
+            <Image src={this.resolveImage(this.props.App.instHolders.Loc6B)}
+              className="instHolder"
+              width={this.props.App.insts[this.props.App.instHolders.Loc6B].width}
+              id="instHolder6"/>
+            :
+            null
+          }
 
             {/* Loc3C */}
             <Image src={this.props.App.locs.Loc3C===true? loc2:loc1}
@@ -132,6 +250,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc3C?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc3C)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc3C].width}
+                id="instHolder7"/>
+              :
+              null
+            }
 
             {/* Loc4C */}
             <Image src={this.props.App.locs.Loc4C===true? loc2:loc1}
@@ -140,6 +266,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc4C?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc4C)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc4C].width}
+                id="instHolder8"/>
+              :
+              null
+            }
 
             {/* Loc5C */}
             <Image src={this.props.App.locs.Loc5C===true? loc2:loc1}
@@ -148,6 +282,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+          {this.props.App.instHolders.Loc5C?
+            <Image src={this.resolveImage(this.props.App.instHolders.Loc5C)}
+              className="instHolder"
+              width={this.props.App.insts[this.props.App.instHolders.Loc5C].width}
+              id="instHolder9"/>
+            :
+            null
+          }
 
             {/* Loc1D */}
             <Image src={this.props.App.locs.Loc1D===true? loc2:loc1}
@@ -156,6 +298,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+          {this.props.App.instHolders.Loc1D?
+            <Image src={this.resolveImage(this.props.App.instHolders.Loc1D)}
+              className="instHolder"
+              width={this.props.App.insts[this.props.App.instHolders.Loc1D].width}
+              id="instHolder10"/>
+            :
+            null
+          }
 
             {/* Loc2D */}
             <Image src={this.props.App.locs.Loc2D===true? loc2:loc1}
@@ -164,6 +314,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc2D?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc2D)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc2D].width}
+                id="instHolder11"/>
+              :
+              null
+            }
 
             {/* Loc3D */}
             <Image src={this.props.App.locs.Loc3D===true? loc2:loc1}
@@ -172,6 +330,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc3D?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc3D)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc3D].width}
+                id="instHolder12"/>
+              :
+              null
+            }
 
             {/* Loc5D */}
             <Image src={this.props.App.locs.Loc5D===true? loc2:loc1}
@@ -180,6 +346,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+          {this.props.App.instHolders.Loc5D?
+            <Image src={this.resolveImage(this.props.App.instHolders.Loc5D)}
+              className="instHolder"
+              width={this.props.App.insts[this.props.App.instHolders.Loc5D].width}
+              id="instHolder13"/>
+            :
+            null
+          }
 
             {/* Loc6D */}
             <Image src={this.props.App.locs.Loc6D===true? loc2:loc1}
@@ -188,6 +362,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc6D?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc6D)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc6D].width}
+                id="instHolder14"/>
+              :
+              null
+            }
 
             {/* Loc7D */}
             <Image src={this.props.App.locs.Loc7D===true? loc2:loc1}
@@ -196,6 +378,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc7D?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc7D)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc7D].width}
+                id="instHolder15"/>
+              :
+              null
+            }
 
             {/* Loc3E */}
             <Image src={this.props.App.locs.Loc3E===true? loc2:loc1}
@@ -204,6 +394,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+          {this.props.App.instHolders.Loc3E?
+            <Image src={this.resolveImage(this.props.App.instHolders.Loc3E)}
+              className="instHolder"
+              width={this.props.App.insts[this.props.App.instHolders.Loc3E].width}
+              id="instHolder16"/>
+            :
+            null
+          }
 
             {/* Loc4E */}
             <Image src={this.props.App.locs.Loc4E===true? loc2:loc1}
@@ -212,6 +410,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc4E?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc4E)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc4E].width}
+                id="instHolder17"/>
+              :
+              null
+            }
 
             {/* Loc5E */}
             <Image src={this.props.App.locs.Loc5E===true? loc2:loc1}
@@ -220,6 +426,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+          {this.props.App.instHolders.Loc5E?
+            <Image src={this.resolveImage(this.props.App.instHolders.Loc5E)}
+              className="instHolder"
+              width={this.props.App.insts[this.props.App.instHolders.Loc5E].width}
+              id="instHolder18"/>
+            :
+            null
+          }
 
             {/* Loc2F */}
             <Image src={this.props.App.locs.Loc2F===true? loc2:loc1}
@@ -228,6 +442,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc2F?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc2F)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc2F].width}
+                id="instHolder19"/>
+              :
+              null
+            }
 
             {/* Loc4F */}
             <Image src={this.props.App.locs.Loc4F===true? loc2:loc1}
@@ -236,6 +458,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc4F?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc4F)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc4F].width}
+                id="instHolder20"/>
+              :
+              null
+            }
 
             {/* Loc6F */}
             <Image src={this.props.App.locs.Loc6F===true? loc2:loc1}
@@ -244,6 +474,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc6F?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc6F)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc6F].width}
+                id="instHolder21"/>
+              :
+              null
+            }
 
             {/* Loc1G */}
             <Image src={this.props.App.locs.Loc1G===true? loc2:loc1}
@@ -252,6 +490,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc1G?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc1G)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc1G].width}
+                id="instHolder22"/>
+              :
+              null
+            }
 
             {/* Loc4G */}
             <Image src={this.props.App.locs.Loc4G===true? loc2:loc1}
@@ -260,6 +506,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+            {this.props.App.instHolders.Loc4G?
+              <Image src={this.resolveImage(this.props.App.instHolders.Loc4G)}
+                className="instHolder"
+                width={this.props.App.insts[this.props.App.instHolders.Loc4G].width}
+                id="instHolder23"/>
+              :
+              null
+            }
 
             {/* Loc7G */}
             <Image src={this.props.App.locs.Loc7G===true? loc2:loc1}
@@ -268,6 +522,14 @@ class App extends Component {
                   onMouseEnter={this.handleViewLoc}
                   onMouseLeave={this.handleHideLoc}
                   onClick={this.handleBoardInst}/>
+              {this.props.App.instHolders.Loc7G?
+                <Image src={this.resolveImage(this.props.App.instHolders.Loc7G)}
+                  className="instHolder"
+                  width={this.props.App.insts[this.props.App.instHolders.Loc7G].width}
+                  id="instHolder24"/>
+                :
+                null
+              }
 
 
 
