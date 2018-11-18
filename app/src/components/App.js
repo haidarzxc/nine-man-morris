@@ -62,6 +62,8 @@ function isInst(player,inst){
   return false
 }
 
+
+
 class App extends Component {
   constructor(props, context) {
     super(props, context);
@@ -73,7 +75,77 @@ class App extends Component {
     this.resolveImage=this.resolveImage.bind(this);
     this.HandleGameStart=this.HandleGameStart.bind(this);
 
+    this.mills=this.mills.bind(this);
+    this.millRows=this.millRows.bind(this);
+    this.millColumns=this.millColumns.bind(this);
+  }
 
+  millRows(){
+    for(var row in this.props.App.matrix){
+      if(row==="4"){
+        if((isInst(this.props.App.turn,this.props.App.matrix[row]["A"]) &&
+            isInst(this.props.App.turn,this.props.App.matrix[row]["B"]) &&
+            isInst(this.props.App.turn,this.props.App.matrix[row]["C"])) ||
+           (isInst(this.props.App.turn,this.props.App.matrix[row]["E"]) &&
+            isInst(this.props.App.turn,this.props.App.matrix[row]["F"]) &&
+            isInst(this.props.App.turn,this.props.App.matrix[row]["G"]))
+          ){
+            console.log("-----R4 Mill------->",this.props.App.turn,row);
+          }
+          continue
+      }
+      let c=0
+      for(var col in this.props.App.matrix[row]){
+        if(this.props.App.matrix[row][col]!==null){
+          let is=isInst(this.props.App.turn,this.props.App.matrix[row][col])
+          if(is){
+            c++
+          }
+        }
+      }// end of row check
+      if(c===3){
+        // row mill
+        console.log("-----R------->",this.props.App.turn,c,row);
+      }
+
+    }
+  }// end of millRows
+
+  millColumns(){
+    let cols=["A","B","C","D","E","F","G"]
+    for(var col in cols){
+      if(cols[col]==="D"){
+        if(
+          (isInst(this.props.App.turn,this.props.App.matrix["1"][cols[col]]) &&
+            isInst(this.props.App.turn,this.props.App.matrix["2"][cols[col]]) &&
+            isInst(this.props.App.turn,this.props.App.matrix["3"][cols[col]])) ||
+            (isInst(this.props.App.turn,this.props.App.matrix["5"][cols[col]]) &&
+              isInst(this.props.App.turn,this.props.App.matrix["6"][cols[col]]) &&
+              isInst(this.props.App.turn,this.props.App.matrix["7"][cols[col]]))
+        ){
+          console.log("-----C4 Mill------->",this.props.App.turn,cols[col]);
+        }
+        continue
+      }
+      let c=0
+      for(var row in this.props.App.matrix){
+        let is=isInst(this.props.App.turn,this.props.App.matrix[row][cols[col]])
+        if(is){
+          c++
+        }
+      }
+      if(c===3){
+        // col mill
+        console.log("-----C------->",this.props.App.turn,c,cols[col]);
+      }
+    }
+
+  }// end of millColumns
+
+  mills(){
+    console.log(this.props.App.matrix);
+    // this.millRows()
+    // this.millColumns()
   }
 
 
@@ -102,7 +174,7 @@ class App extends Component {
     if(this.props.App.inst!==null){
       // console.log(event.target.id);
       // console.log(this.props.App.inst);
-      console.log(this.props.App.instHolders);
+      // console.log(this.props.App.instHolders);
       this.props.dispatch({ type: 'RENDER_INST' ,loc:event.target.id,inst:this.props.App.inst});
       try{
         document.getElementById(this.props.App.inst).remove()
@@ -120,7 +192,10 @@ class App extends Component {
         this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
         this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
       }
+      this.props.dispatch({type: "UPDATE_MATRIX",inst:this.props.App.inst,loc:event.target.id})
+      this.mills()
       this.props.dispatch({type: "SET_INST",inst:null})
+
     }
   }
 

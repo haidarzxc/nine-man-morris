@@ -181,6 +181,15 @@ const initialState = {
     Loc7G:false
   },
 
+  matrix:{
+    "1":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
+    "2":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
+    "3":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
+    "4":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
+    "5":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
+    "6":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
+    "7":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
+  },
 
 
 };
@@ -215,6 +224,20 @@ function App(state = initialState, action) {
       }
       return {
         ...state,
+
+      };
+
+    case 'UPDATE_MATRIX':
+      let loc = action.loc.replace('Loc','');
+      for(var row in state.matrix){
+        if(loc[0]===row){
+          state.matrix[row][loc[1]]=action.inst
+        }
+
+      }
+      // console.log(state.matrix);
+      return {
+        ...state
 
       };
 
