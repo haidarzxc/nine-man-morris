@@ -240,6 +240,11 @@ class App extends Component {
     if(this.props.App.millRow || this.props.App.millCol || this.props.App.millDig){
       this.removeInst(evt)
     }
+    console.log(document.getElementById("playerA"));
+    if (!document.getElementById("playerA").hasChildNodes() &&
+        !document.getElementById("playerB").hasChildNodes()) {
+        console.log("now Make Moves");
+    }
 
 
   }//end of handleInst
@@ -436,7 +441,7 @@ class App extends Component {
 
             </ListGroupItem>
 
-            <ListGroupItem className={this.props.App.highlightPA? "highlightPAON":"highlightPAOFF"} header="Player A">
+            <ListGroupItem id="playerA" className={this.props.App.highlightPA? "highlightPAON":"highlightPAOFF"} header="Player A">
 
               <Image src={inst1} className={this.props.App.highlightInst==="inst1"? "HighlightInst":null}  width="6%" id="inst1" onClick={this.handleInst}/>
               <Image src={inst2} className={this.props.App.highlightInst==="inst2"? "HighlightInst":null}  width="10%" id="inst2" onClick={this.handleInst}/>
@@ -451,7 +456,7 @@ class App extends Component {
             </ListGroupItem>
 
 
-          <ListGroupItem className={this.props.App.highlightPB? "highlightPBON":"highlightPBOFF"} header="Player B">
+          <ListGroupItem id="playerB" className={this.props.App.highlightPB? "highlightPBON":"highlightPBOFF"} header="Player B">
 
             <Image src={inst10} className={this.props.App.highlightInst==="inst10"? "HighlightInst":null}  width="14%" id="inst10" onClick={this.handleInst}/>
             <Image src={inst11} className={this.props.App.highlightInst==="inst11"? "HighlightInst":null} width="13%" id="inst11" onClick={this.handleInst}/>
