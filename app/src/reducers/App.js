@@ -153,6 +153,7 @@ const initialState = {
   highlightPA:null,
   highlightPB:null,
   turn:null,
+  storeTurn:null,
 
   instHolders:{
     Loc1A:false,
@@ -288,6 +289,15 @@ function App(state = initialState, action) {
       return {
         ...state,
         turn:action.val
+
+      };
+
+    case 'STORE_TURN':
+      return {
+        ...state,
+        storeTurn:state.turn,
+        turn:state.val
+
 
       };
 

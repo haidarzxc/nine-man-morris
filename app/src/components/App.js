@@ -79,7 +79,13 @@ class App extends Component {
     this.millRows=this.millRows.bind(this);
     this.millColumns=this.millColumns.bind(this);
     this.millDiagonal=this.millDiagonal.bind(this);
-  }
+    this.removeInst=this.removeInst.bind(this);
+    this.handleImage=this.handleImage.bind(this);
+
+
+
+
+  }// end of constructor
 
   millRows(){
     for(var row in this.props.App.matrix){
@@ -90,6 +96,7 @@ class App extends Component {
           ){
             // console.log("-----R4 Mill------->",this.props.App.turn,row);
             this.props.dispatch({type: "MILL_ROW",val:row,holders:["A","B","C"]})
+            return row
           }
         else if ((isInst(this.props.App.turn,this.props.App.matrix[row]["E"]) &&
          isInst(this.props.App.turn,this.props.App.matrix[row]["F"]) &&
@@ -97,6 +104,7 @@ class App extends Component {
         ){
             // console.log("-----R4 Mill------->",this.props.App.turn,row);
             this.props.dispatch({type: "MILL_ROW",val:row,holders:["E","F","G"]})
+            return row
          }
           continue
       }
@@ -113,9 +121,11 @@ class App extends Component {
         // row mill
         // console.log("-----R------->",this.props.App.turn,c,row);
         this.props.dispatch({type: "MILL_ROW",val:row})
+        return row
       }
 
     }
+    return false
   }// end of millRows
 
   millColumns(){
@@ -129,6 +139,7 @@ class App extends Component {
         ){
           // console.log("-----C4 Mill------->",this.props.App.turn,cols[col]);
           this.props.dispatch({type: "MILL_COL",val:cols[col],holders:["1","2","3"]})
+          return cols[col]
         }
         else if(
           (isInst(this.props.App.turn,this.props.App.matrix["5"][cols[col]]) &&
@@ -136,6 +147,7 @@ class App extends Component {
             isInst(this.props.App.turn,this.props.App.matrix["7"][cols[col]]))
         ){
           this.props.dispatch({type: "MILL_COL",val:cols[col],holders:["5","6","7"]})
+          return cols[col]
         }
         continue
       }
@@ -150,6 +162,7 @@ class App extends Component {
         // col mill
         // console.log("-----C------->",this.props.App.turn,c,cols[col]);
         this.props.dispatch({type: "MILL_COL",val:cols[col]})
+        return cols[col]
       }
     }
 
@@ -163,10 +176,44 @@ class App extends Component {
     // }
   }// end of millDiagonal
 
+  removeInst(evt){
+    let loc
+    for (let key of Object.keys(this.props.App.placeHolder)) {
+      if(this.props.App.placeHolder[key]===evt.target.id){
+        loc=key
+      }
+    }
+    this.props.dispatch({ type: 'RENDER_INST' ,loc:loc,inst:false});
+    this.props.dispatch({type: "MILL_COL",val:null})
+    this.props.dispatch({type: "MILL_ROW",val:null})
+    this.props.dispatch({ type: 'SET_TURN',val:this.props.App.storeTurn});
+    if(this.props.App.storeTurn===0){
+      this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
+    }
+    else if(this.props.App.storeTurn===1){
+      this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
+    }
+
+  }// end of removeInst
+
+  handleImage(evt){
+    if(this.props.App.millRow || this.props.App.millCol){
+      this.removeInst(evt)
+    }
+
+
+  }//end of handleInst
+
   mills(){
-    console.log(this.props.App.matrix);
-    this.millRows()
-    this.millColumns()
+    // console.log(this.props.App.matrix);
+    let row=this.millRows()
+    let col=this.millColumns()
+    if(row || col){
+      this.props.dispatch({ type: 'STORE_TURN',val:-1});
+      this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
+      this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
+      return -1
+    }
   }// end of mills
 
 
@@ -203,6 +250,12 @@ class App extends Component {
       catch(err){
       }
 
+      this.props.dispatch({type: "UPDATE_MATRIX",inst:this.props.App.inst,loc:event.target.id})
+      let mill=this.mills()
+      if(mill){
+        this.props.dispatch({type: "SET_INST",inst:null})
+        return
+      }
       if(this.props.App.turn===0){
         this.props.dispatch({ type: 'SET_TURN',val:1});
         this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
@@ -213,8 +266,7 @@ class App extends Component {
         this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
         this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
       }
-      this.props.dispatch({type: "UPDATE_MATRIX",inst:this.props.App.inst,loc:event.target.id})
-      this.mills()
+
       this.props.dispatch({type: "SET_INST",inst:null})
 
     }
@@ -305,7 +357,8 @@ class App extends Component {
                   className={isInst(0,this.props.App.instHolders[loc])?
                              "instHolderA":"instHolderB"}
                   width={this.props.App.insts[this.props.App.instHolders[loc]].width}
-                  id={this.props.App.placeHolder[loc]}/>
+                  id={this.props.App.placeHolder[loc]}
+                  onClick={this.handleImage}/>
 
              )
          }
