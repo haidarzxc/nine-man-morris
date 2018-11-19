@@ -190,6 +190,10 @@ const initialState = {
     "6":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
     "7":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
   },
+  millRow:null,
+  millCol:null,
+  millDig:null,
+  holders:null,
 
 
 };
@@ -239,6 +243,20 @@ function App(state = initialState, action) {
       return {
         ...state
 
+      };
+
+    case 'MILL_ROW':
+      return {
+        ...state,
+        millRow:action.val,
+        holders:action.holders
+      };
+
+    case 'MILL_COL':
+      return {
+        ...state,
+        millCol:action.val,
+        holders:action.holders
       };
 
     case 'SHOW_LOC':
