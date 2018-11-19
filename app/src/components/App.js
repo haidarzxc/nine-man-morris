@@ -378,7 +378,6 @@ class App extends Component {
           labelClass="millCol"
         }
       }
-      console.log(this.props.App.millDig);
       if(this.props.App.millDig!==null && this.props.App.millDig.includes(stripLoc)){
         labelClass="millDig"
       }
