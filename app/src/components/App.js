@@ -183,16 +183,26 @@ class App extends Component {
         loc=key
       }
     }
-    this.props.dispatch({ type: 'RENDER_INST' ,loc:loc,inst:false});
-    this.props.dispatch({type: "MILL_COL",val:null})
-    this.props.dispatch({type: "MILL_ROW",val:null})
-    this.props.dispatch({ type: 'SET_TURN',val:this.props.App.storeTurn});
-    if(this.props.App.storeTurn===0){
-      this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
+    let revTurn=this.props.App.storeTurn
+    if(revTurn===0){
+      revTurn=1
     }
-    else if(this.props.App.storeTurn===1){
-      this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
+    else if(revTurn===1){
+      revTurn=0
     }
+    if(isInst(revTurn,this.props.App.instHolders[loc])){
+      this.props.dispatch({ type: 'RENDER_INST' ,loc:loc,inst:false});
+      this.props.dispatch({type: "MILL_COL",val:null})
+      this.props.dispatch({type: "MILL_ROW",val:null})
+      this.props.dispatch({ type: 'SET_TURN',val:revTurn});
+      if(revTurn===0){
+        this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
+      }
+      else if(this.props.App.storeTurn===1){
+        this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
+      }
+    }
+
 
   }// end of removeInst
 
