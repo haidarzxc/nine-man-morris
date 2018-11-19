@@ -6,7 +6,8 @@ import {
   Image,
   Row,
   Col,
-  Button} from "react-bootstrap"
+  Button,
+  Badge} from "react-bootstrap"
 
 import { connect  } from 'react-redux';
 
@@ -194,11 +195,12 @@ class App extends Component {
       this.props.dispatch({ type: 'RENDER_INST' ,loc:loc,inst:false});
       this.props.dispatch({type: "MILL_COL",val:null})
       this.props.dispatch({type: "MILL_ROW",val:null})
+      this.props.dispatch({type: "UPDATE_SOCRE",player:revTurn})
       this.props.dispatch({ type: 'SET_TURN',val:revTurn});
       if(revTurn===0){
         this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
       }
-      else if(this.props.App.storeTurn===1){
+      else if(revTurn===1){
         this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
       }
     }
@@ -395,10 +397,9 @@ class App extends Component {
         <ListGroup>
 
             <ListGroupItem header="Game Status." bsStyle="danger">
-            <Button bsStyle="primary" onClick={this.HandleGameStart}>Start Game</Button>
-            Mode:
-            won:
-            lost:
+            <Button bsStyle="primary" onClick={this.HandleGameStart}>Start Game</Button><br/>
+            <span>player A score: <Badge>{this.props.App.playerAScore}</Badge></span> |
+            <span>player B score: <Badge>{this.props.App.playerBScore}</Badge></span>
 
             </ListGroupItem>
 
