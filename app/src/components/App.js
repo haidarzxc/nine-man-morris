@@ -170,11 +170,39 @@ class App extends Component {
   }// end of millColumns
 
   millDiagonal(){
-    // if(
-    //
-    // ){
-    //
-    // }
+    if(
+      isInst(this.props.App.turn,this.props.App.matrix["7"]["A"]) &&
+      isInst(this.props.App.turn,this.props.App.matrix["6"]["B"]) &&
+      isInst(this.props.App.turn,this.props.App.matrix["5"]["C"])
+    ){
+      this.props.dispatch({type: "MILL_DIG",val:["7A","6B","5C"]})
+      return ["7A","6B","5C"]
+    }
+    else if(
+      isInst(this.props.App.turn,this.props.App.matrix["7"]["G"]) &&
+      isInst(this.props.App.turn,this.props.App.matrix["6"]["F"]) &&
+      isInst(this.props.App.turn,this.props.App.matrix["5"]["E"])
+    ){
+      this.props.dispatch({type: "MILL_DIG",val:["7G","6F","5E"]})
+      return ["7G","6F","5E"]
+    }
+
+    else if(
+      isInst(this.props.App.turn,this.props.App.matrix["1"]["A"]) &&
+      isInst(this.props.App.turn,this.props.App.matrix["2"]["B"]) &&
+      isInst(this.props.App.turn,this.props.App.matrix["3"]["C"])
+    ){
+      this.props.dispatch({type: "MILL_DIG",val:["1A","2B","3C"]})
+      return ["1A","2B","3C"]
+    }
+    else if(
+      isInst(this.props.App.turn,this.props.App.matrix["1"]["G"]) &&
+      isInst(this.props.App.turn,this.props.App.matrix["2"]["F"]) &&
+      isInst(this.props.App.turn,this.props.App.matrix["3"]["E"])
+    ){
+      this.props.dispatch({type: "MILL_DIG",val:["1G","2F","3E"]})
+      return ["1G","2F","3E"]
+    }
   }// end of millDiagonal
 
   removeInst(evt){
@@ -209,7 +237,7 @@ class App extends Component {
   }// end of removeInst
 
   handleImage(evt){
-    if(this.props.App.millRow || this.props.App.millCol){
+    if(this.props.App.millRow || this.props.App.millCol || this.props.App.millDig){
       this.removeInst(evt)
     }
 
@@ -220,7 +248,8 @@ class App extends Component {
     // console.log(this.props.App.matrix);
     let row=this.millRows()
     let col=this.millColumns()
-    if(row || col){
+    let dig=this.millDiagonal()
+    if(row || col || dig){
       this.props.dispatch({ type: 'STORE_TURN',val:-1});
       this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
       this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
@@ -349,6 +378,11 @@ class App extends Component {
           labelClass="millCol"
         }
       }
+      console.log(this.props.App.millDig);
+      if(this.props.App.millDig!==null && this.props.App.millDig.includes(stripLoc)){
+        labelClass="millDig"
+      }
+
       c++
       content.push(
         <Image key={c} src={this.props.App.locs[loc]===true? loc2:loc1}

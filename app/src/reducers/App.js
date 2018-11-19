@@ -256,6 +256,13 @@ function App(state = initialState, action) {
         holders:action.holders
       };
 
+    case 'MILL_DIG':
+      console.log(action.val);
+      return {
+        ...state,
+        millDig:action.val
+      };
+
     case 'UPDATE_SOCRE':
       if(action.player===0){
         state.playerAScore=state.playerAScore-1
@@ -264,9 +271,7 @@ function App(state = initialState, action) {
         state.playerBScore=state.playerAScore-1
       }
       return {
-        ...state,
-        millRow:action.val,
-        holders:action.holders
+        ...state
       };
 
     case 'MILL_COL':
