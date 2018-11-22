@@ -221,8 +221,10 @@ class App extends Component {
     }
     if(isInst(revTurn,this.props.App.instHolders[loc])){
       this.props.dispatch({ type: 'RENDER_INST' ,loc:loc,inst:false});
+      this.props.dispatch({ type: 'UPDATE_MATRIX' ,loc:loc,inst:false});
       this.props.dispatch({type: "MILL_COL",val:null})
       this.props.dispatch({type: "MILL_ROW",val:null})
+      this.props.dispatch({type: "MILL_DIG",val:null})
       this.props.dispatch({type: "UPDATE_SOCRE",player:revTurn})
       this.props.dispatch({ type: 'SET_TURN',val:revTurn});
       if(revTurn===0){
