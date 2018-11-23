@@ -261,16 +261,12 @@ function App(state = initialState, action) {
       state.historyMill[state.storeTurn].push(state.mill[state.storeTurn])
       return {
         ...state,
-
       };
 
     case 'REMOVE_FROM_HISTORY_MILL':
-      console.log("before",state.historyMill[action.turn],action.turn);
       state.historyMill[action.turn].splice(action.idx, 1);
-      console.log("after",state.historyMill[action.turn]);
       return {
         ...state,
-
       };
 
 
