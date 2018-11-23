@@ -223,6 +223,7 @@ const initialState = {
 
   playerAScore:9,
   playerBScore:9,
+  labelMoves:null,
 
 
 };
@@ -292,6 +293,12 @@ function App(state = initialState, action) {
 
     case 'REMOVE_FROM_HISTORY_MILL':
       state.historyMill[action.turn].splice(action.idx, 1);
+      return {
+        ...state,
+      };
+
+    case 'Label_MOVES':
+      state.labelMoves=action.locs
       return {
         ...state,
       };

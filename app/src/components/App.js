@@ -108,6 +108,7 @@ class App extends Component {
     this.removeInst=this.removeInst.bind(this);
     this.handleImage=this.handleImage.bind(this);
     this.checkHistoryMill=this.checkHistoryMill.bind(this);
+    this.makeMove=this.makeMove.bind(this);
 
 
   }// end of constructor
@@ -305,6 +306,16 @@ class App extends Component {
 
   }// end of removeInst
 
+  makeMove(evt){
+    let loc
+    for (let key of Object.keys(this.props.App.placeHolder)) {
+      if(this.props.App.placeHolder[key]===evt.target.id){
+        loc=key
+      }
+    }
+    this.props.dispatch({ type: 'Label_MOVES',locs:this.props.App.adjacentLocs[loc]});
+  }
+
   handleImage(evt){
     if(this.props.App.mill[this.props.App.storeTurn]){
       this.removeInst(evt)
@@ -314,6 +325,8 @@ class App extends Component {
     //     !document.getElementById("playerB").hasChildNodes()) {
     //     console.log("now Make Moves");
     // }
+    // this.makeMove(evt)
+
 
 
   }//end of handleInst
@@ -438,6 +451,12 @@ class App extends Component {
       ){
         labelClass="millRow"
 
+      }
+
+      if(this.props.App.labelMoves &&
+      this.props.App.labelMoves.includes(stripLoc) &&
+      this.props.App.matrix[stripLoc[0]][stripLoc[1]]===null){
+        labelClass="millRow"
       }
 
 
