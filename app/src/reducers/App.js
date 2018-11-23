@@ -191,23 +191,14 @@ const initialState = {
     "6":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
     "7":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
   },
-  millRow:null,
-  millCol:null,
-  millDig:null,
+  mill:{"0":null,"1":null},
+  historyMill:{"0":null,"1":null},
 
   playerAScore:9,
   playerBScore:9,
 
 
 };
-
-const removeMill=(state,rowObj,mill)=>{
-  for(var m in mill){
-    rowObj[mill[m][1]]=rowObj[mill[m][1]]
-  }
-  // console.log("removeMill",rowObj,mill);
-  state.matrix[mill[0][0]]=rowObj
-}
 
 const setLoc=(val,state,isOn)=>{
   let locs={}
@@ -255,39 +246,24 @@ function App(state = initialState, action) {
 
       };
 
-    case 'REMOVE_MILL_MATRIX':
-      console.log(state.millRow,state.millCol,state.millDig);
-      if(state.millRow){
-        let obj=state.matrix[state.millRow[0][0]]
-        removeMill(state,obj,state.millRow)
-      }
-      else if(state.millCol){
-        let obj=state.matrix[state.millCol[0][0]]
-        removeMill(state,obj,state.millCol)
-      }
-      else if(state.millDig){
-        state.matrix[state.millDig[0][0]][state.millDig[0][1]]=null
-        state.matrix[state.millDig[1][0]][state.millDig[1][1]]=null
-        state.matrix[state.millDig[2][0]][state.millDig[2][1]]=null
-      }
-
-      return {
-        ...state
-
-      };
-
-    case 'MILL_ROW':
+      case 'SET_MILL':
+        state.mill[state.turn]=action.val
+        return {
+          ...state,
+        };
+    case 'RESET_MILL':
+      state.mill[state.storeTurn]=action.val
       return {
         ...state,
-        millRow:action.val,
       };
 
-    case 'MILL_DIG':
-      console.log(action.val);
+    case 'HISTORY_MILL':
+      state.historyMill[state.storeTurn]=state.mill[state.storeTurn]
       return {
         ...state,
-        millDig:action.val
+
       };
+
 
     case 'UPDATE_SOCRE':
       if(action.player===0){
@@ -300,11 +276,6 @@ function App(state = initialState, action) {
         ...state
       };
 
-    case 'MILL_COL':
-      return {
-        ...state,
-        millCol:action.val
-      };
 
     case 'SHOW_LOC':
 

@@ -63,6 +63,17 @@ function isInst(player,inst){
   return false
 }
 
+function isSameMill(historyMill,mill) {
+    if(historyMill!==null){
+      for(var loc in historyMill){
+        if(historyMill[loc] !== mill[loc])
+            return false;
+      }
+      return true;
+    }
+    return false
+}
+
 
 
 class App extends Component {
@@ -85,26 +96,33 @@ class App extends Component {
 
 
 
-
   }// end of constructor
+
+
 
   millRows(){
     for(var row in this.props.App.matrix){
       if(row==="4"){
         if((isInst(this.props.App.turn,this.props.App.matrix[row]["A"]) &&
             isInst(this.props.App.turn,this.props.App.matrix[row]["B"]) &&
-            isInst(this.props.App.turn,this.props.App.matrix[row]["C"]))
+            isInst(this.props.App.turn,this.props.App.matrix[row]["C"])) &&
+            isSameMill(this.props.App.historyMill[this.props.App.turn],
+              [row+"A",row+"B",row+"C"])===false
           ){
             // console.log("-----R4 Mill------->",this.props.App.turn,row);
-            this.props.dispatch({type: "MILL_ROW",val:[row+"A",row+"B",row+"C"]})
+            // this.props.dispatch({type: "MILL_ROW",val:[row+"A",row+"B",row+"C"]})
+            this.props.dispatch({ type: 'SET_MILL', val:[row+"A",row+"B",row+"C"]});
             return [row+"A",row+"B",row+"C"]
           }
-        else if ((isInst(this.props.App.turn,this.props.App.matrix[row]["E"]) &&
+        if ((isInst(this.props.App.turn,this.props.App.matrix[row]["E"]) &&
          isInst(this.props.App.turn,this.props.App.matrix[row]["F"]) &&
-         isInst(this.props.App.turn,this.props.App.matrix[row]["G"]))
+         isInst(this.props.App.turn,this.props.App.matrix[row]["G"])) &&
+         isSameMill(this.props.App.historyMill[this.props.App.turn],
+           [row+"E",row+"F",row+"G"])===false
         ){
             // console.log("-----R4 Mill------->",this.props.App.turn,row);
-            this.props.dispatch({type: "MILL_ROW",val:[row+"E",row+"F",row+"G"]})
+            // this.props.dispatch({type: "MILL_ROW",val:[row+"E",row+"F",row+"G"]})
+            this.props.dispatch({ type: 'SET_MILL',val:[row+"E",row+"F",row+"G"]});
             return [row+"E",row+"F",row+"G"]
          }
           continue
@@ -120,10 +138,14 @@ class App extends Component {
           }
         }
       }// end of row check
-      if(c===3){
+
+      if(c===3 &&
+      isSameMill(this.props.App.historyMill[this.props.App.turn],
+        millRow)===false){
         // row mill
         // console.log("-----R------->",this.props.App.turn,c,row);
-        this.props.dispatch({type: "MILL_ROW",val:millRow})
+        // this.props.dispatch({type: "MILL_ROW",val:millRow})
+        this.props.dispatch({ type: 'SET_MILL',val:millRow});
         return millRow
       }
 
@@ -138,18 +160,25 @@ class App extends Component {
         if(
           (isInst(this.props.App.turn,this.props.App.matrix["1"][cols[col]]) &&
             isInst(this.props.App.turn,this.props.App.matrix["2"][cols[col]]) &&
-            isInst(this.props.App.turn,this.props.App.matrix["3"][cols[col]]))
+            isInst(this.props.App.turn,this.props.App.matrix["3"][cols[col]])) &&
+            isSameMill(this.props.App.historyMill[this.props.App.turn],
+              ["1"+cols[col],"2"+cols[col],"3"+cols[col]])===false
         ){
-          // console.log("-----C4 Mill------->",this.props.App.turn,cols[col]);
-          this.props.dispatch({type: "MILL_COL",val:["1"+cols[col],"2"+cols[col],"3"+cols[col]]})
+          console.log("-----C4 Mill------->",this.props.App.turn,cols[col]);
+          // this.props.dispatch({type: "MILL_COL",val:["1"+cols[col],"2"+cols[col],"3"+cols[col]]})
+          this.props.dispatch({ type: 'SET_MILL',val:["1"+cols[col],"2"+cols[col],"3"+cols[col]]});
           return ["1"+cols[col],"2"+cols[col],"3"+cols[col]]
         }
-        else if(
+        if(
           (isInst(this.props.App.turn,this.props.App.matrix["5"][cols[col]]) &&
             isInst(this.props.App.turn,this.props.App.matrix["6"][cols[col]]) &&
-            isInst(this.props.App.turn,this.props.App.matrix["7"][cols[col]]))
+            isInst(this.props.App.turn,this.props.App.matrix["7"][cols[col]])) &&
+            isSameMill(this.props.App.historyMill[this.props.App.turn],
+              ["5"+cols[col],"6"+cols[col],"7"+cols[col]])===false
         ){
-          this.props.dispatch({type: "MILL_COL",val:["5"+cols[col],"6"+cols[col],"7"+cols[col]]})
+          // this.props.dispatch({type: "MILL_COL",val:["5"+cols[col],"6"+cols[col],"7"+cols[col]]})
+          console.log("-----C4 Mill------->",this.props.App.turn,cols[col]);
+          this.props.dispatch({ type: 'SET_MILL',val:["5"+cols[col],"6"+cols[col],"7"+cols[col]]});
           return ["5"+cols[col],"6"+cols[col],"7"+cols[col]]
         }
         continue
@@ -163,10 +192,12 @@ class App extends Component {
           c++
         }
       }
-      if(c===3){
+      if(c===3  &&
+      isSameMill(this.props.App.historyMill[this.props.App.turn],millCol)===false){
         // col mill
         // console.log("-----C------->",this.props.App.turn,c,cols[col]);
-        this.props.dispatch({type: "MILL_COL",val:millCol})
+        // this.props.dispatch({type: "MILL_COL",val:millCol})
+        this.props.dispatch({ type: 'SET_MILL',val:millCol});
         return millCol
       }
     }
@@ -175,36 +206,44 @@ class App extends Component {
 
   millDiagonal(){
     if(
-      isInst(this.props.App.turn,this.props.App.matrix["7"]["A"]) &&
+      (isInst(this.props.App.turn,this.props.App.matrix["7"]["A"]) &&
       isInst(this.props.App.turn,this.props.App.matrix["6"]["B"]) &&
-      isInst(this.props.App.turn,this.props.App.matrix["5"]["C"])
+      isInst(this.props.App.turn,this.props.App.matrix["5"]["C"])) &&
+      isSameMill(this.props.App.historyMill[this.props.App.turn],["7A","6B","5C"])===false
     ){
-      this.props.dispatch({type: "MILL_DIG",val:["7A","6B","5C"]})
+      // this.props.dispatch({type: "MILL_DIG",val:["7A","6B","5C"]})
+      this.props.dispatch({ type: 'SET_MILL',val:["7A","6B","5C"]});
       return ["7A","6B","5C"]
     }
-    else if(
-      isInst(this.props.App.turn,this.props.App.matrix["7"]["G"]) &&
+    if(
+      (isInst(this.props.App.turn,this.props.App.matrix["7"]["G"]) &&
       isInst(this.props.App.turn,this.props.App.matrix["6"]["F"]) &&
-      isInst(this.props.App.turn,this.props.App.matrix["5"]["E"])
+      isInst(this.props.App.turn,this.props.App.matrix["5"]["E"])) &&
+      isSameMill(this.props.App.historyMill[this.props.App.turn],["7G","6F","5E"])===false
     ){
-      this.props.dispatch({type: "MILL_DIG",val:["7G","6F","5E"]})
+      // this.props.dispatch({type: "MILL_DIG",val:["7G","6F","5E"]})
+      this.props.dispatch({ type: 'SET_MILL',val:["7G","6F","5E"]});
       return ["7G","6F","5E"]
     }
 
-    else if(
-      isInst(this.props.App.turn,this.props.App.matrix["1"]["A"]) &&
+    if(
+      (isInst(this.props.App.turn,this.props.App.matrix["1"]["A"]) &&
       isInst(this.props.App.turn,this.props.App.matrix["2"]["B"]) &&
-      isInst(this.props.App.turn,this.props.App.matrix["3"]["C"])
+      isInst(this.props.App.turn,this.props.App.matrix["3"]["C"])) &&
+      isSameMill(this.props.App.historyMill[this.props.App.turn],["1A","2B","3C"])===false
     ){
-      this.props.dispatch({type: "MILL_DIG",val:["1A","2B","3C"]})
+      // this.props.dispatch({type: "MILL_DIG",val:["1A","2B","3C"]})
+      this.props.dispatch({ type: 'SET_MILL',val:["1A","2B","3C"]});
       return ["1A","2B","3C"]
     }
     else if(
-      isInst(this.props.App.turn,this.props.App.matrix["1"]["G"]) &&
+      (isInst(this.props.App.turn,this.props.App.matrix["1"]["G"]) &&
       isInst(this.props.App.turn,this.props.App.matrix["2"]["F"]) &&
-      isInst(this.props.App.turn,this.props.App.matrix["3"]["E"])
+      isInst(this.props.App.turn,this.props.App.matrix["3"]["E"])) &&
+      isSameMill(this.props.App.historyMill[this.props.App.turn],["1G","2F","3E"])===false
     ){
-      this.props.dispatch({type: "MILL_DIG",val:["1G","2F","3E"]})
+      // this.props.dispatch({type: "MILL_DIG",val:["1G","2F","3E"]})
+      this.props.dispatch({ type: 'SET_MILL',val:["1G","2F","3E"]});
       return ["1G","2F","3E"]
     }
   }// end of millDiagonal
@@ -226,10 +265,8 @@ class App extends Component {
     if(isInst(revTurn,this.props.App.instHolders[loc])){
       this.props.dispatch({ type: 'RENDER_INST' ,loc:loc,inst:false});
       this.props.dispatch({ type: 'UPDATE_MATRIX' ,loc:loc,inst:null});
-      // this.props.dispatch({ type: 'REMOVE_MILL_MATRIX'});
-      this.props.dispatch({type: "MILL_COL",val:null})
-      this.props.dispatch({type: "MILL_ROW",val:null})
-      this.props.dispatch({type: "MILL_DIG",val:null})
+      this.props.dispatch({ type: 'HISTORY_MILL'});
+      this.props.dispatch({ type: 'RESET_MILL',val:null});
       this.props.dispatch({type: "UPDATE_SOCRE",player:revTurn})
       this.props.dispatch({ type: 'SET_TURN',val:revTurn});
       if(revTurn===0){
@@ -239,12 +276,11 @@ class App extends Component {
         this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
       }
     }
-    console.log("-->",this.props.App.matrix);
 
   }// end of removeInst
 
   handleImage(evt){
-    if(this.props.App.millRow || this.props.App.millCol || this.props.App.millDig){
+    if(this.props.App.mill[this.props.App.storeTurn]){
       this.removeInst(evt)
     }
     // console.log(document.getElementById("playerA"));
@@ -256,12 +292,29 @@ class App extends Component {
 
   }//end of handleInst
 
+
+
   mills(){
-    // console.log(this.props.App.matrix);
     let row=this.millRows()
     let col=this.millColumns()
     let dig=this.millDiagonal()
-    if(row || col || dig){
+    console.log("mills",row,col,dig,this.props.App.historyMill,this.props.App.mill);
+    // if(row && isSameMill(this.props.App.historyMill[this.props.App.turn],row)===true){
+    //   console.log("isSameMill row");
+    //   return null
+    // }
+    //
+    // if(col && isSameMill(this.props.App.historyMill[this.props.App.turn],col)===true){
+    //   console.log("isSameMill col");
+    //   return null
+    // }
+    //
+    // if(dig && isSameMill(this.props.App.historyMill[this.props.App.turn],dig)===true){
+    //   console.log("isSameMill dig");
+    //   return null
+    // }
+
+    if((row || col || dig)){
       this.props.dispatch({ type: 'STORE_TURN',val:-1});
       this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
       this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
@@ -293,9 +346,6 @@ class App extends Component {
 
   handleBoardInst(event){
     if(this.props.App.inst!==null){
-      // console.log(event.target.id);
-      // console.log(this.props.App.inst);
-      // console.log(this.props.App.instHolders);
       this.props.dispatch({ type: 'RENDER_INST' ,loc:event.target.id,inst:this.props.App.inst});
       try{
         document.getElementById(this.props.App.inst).remove()
@@ -305,7 +355,8 @@ class App extends Component {
 
       this.props.dispatch({type: "UPDATE_MATRIX",inst:this.props.App.inst,loc:event.target.id})
       let mill=this.mills()
-      if(mill){
+      console.log("mill",mill);
+      if(mill===-1){
         this.props.dispatch({type: "SET_INST",inst:null})
         return
       }
@@ -369,14 +420,21 @@ class App extends Component {
     for(var loc in this.props.App.locs){
       let stripLoc=loc.replace("Loc","")
       let labelClass
-      if(this.props.App.millRow && this.props.App.millRow.includes(stripLoc)){
+      if(this.props.App.mill[this.props.App.storeTurn] &&
+        this.props.App.mill[this.props.App.storeTurn].includes(stripLoc)){
+          console.log("-->> ",this.props.App.mill[this.props.App.storeTurn]);
         labelClass="millRow"
       }
-      if(this.props.App.millCol && this.props.App.millCol.includes(stripLoc)){
-            labelClass="millCol"
-      }
-      if(this.props.App.millDig!==null && this.props.App.millDig.includes(stripLoc)){
-        labelClass="millDig"
+
+
+
+      console.log(this.props.App.mill[this.props.App.storeTurn],this.props.App.historyMill[this.props.App.storeTurn]);
+      if(
+        this.props.App.historyMill[this.props.App.storeTurn] &&
+        this.props.App.mill[this.props.App.storeTurn] &&
+        isSameMill(this.props.App.historyMill[this.props.App.storeTurn],
+          this.props.App.historyMill[this.props.App.storeTurn])===true){
+        labelClass=""
       }
 
       c++
