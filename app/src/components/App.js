@@ -299,20 +299,7 @@ class App extends Component {
     let col=this.millColumns()
     let dig=this.millDiagonal()
     console.log("mills",row,col,dig,this.props.App.historyMill,this.props.App.mill);
-    // if(row && isSameMill(this.props.App.historyMill[this.props.App.turn],row)===true){
-    //   console.log("isSameMill row");
-    //   return null
-    // }
-    //
-    // if(col && isSameMill(this.props.App.historyMill[this.props.App.turn],col)===true){
-    //   console.log("isSameMill col");
-    //   return null
-    // }
-    //
-    // if(dig && isSameMill(this.props.App.historyMill[this.props.App.turn],dig)===true){
-    //   console.log("isSameMill dig");
-    //   return null
-    // }
+    
 
     if((row || col || dig)){
       this.props.dispatch({ type: 'STORE_TURN',val:-1});
@@ -428,7 +415,7 @@ class App extends Component {
 
 
 
-      console.log(this.props.App.mill[this.props.App.storeTurn],this.props.App.historyMill[this.props.App.storeTurn]);
+      // console.log(this.props.App.mill[this.props.App.storeTurn],this.props.App.historyMill[this.props.App.storeTurn]);
       if(
         this.props.App.historyMill[this.props.App.storeTurn] &&
         this.props.App.mill[this.props.App.storeTurn] &&
