@@ -96,7 +96,7 @@ class App extends Component {
             isInst(this.props.App.turn,this.props.App.matrix[row]["C"]))
           ){
             // console.log("-----R4 Mill------->",this.props.App.turn,row);
-            this.props.dispatch({type: "MILL_ROW",val:row,holders:["A","B","C"]})
+            this.props.dispatch({type: "MILL_ROW",val:["A","B","C"]})
             return row
           }
         else if ((isInst(this.props.App.turn,this.props.App.matrix[row]["E"]) &&
@@ -104,16 +104,18 @@ class App extends Component {
          isInst(this.props.App.turn,this.props.App.matrix[row]["G"]))
         ){
             // console.log("-----R4 Mill------->",this.props.App.turn,row);
-            this.props.dispatch({type: "MILL_ROW",val:row,holders:["E","F","G"]})
+            this.props.dispatch({type: "MILL_ROW",val:["E","F","G"]})
             return row
          }
           continue
       }
+      let millRow=[]
       let c=0
       for(var col in this.props.App.matrix[row]){
         if(this.props.App.matrix[row][col]!==null){
           let is=isInst(this.props.App.turn,this.props.App.matrix[row][col])
           if(is){
+            millRow[c]=col
             c++
           }
         }
@@ -121,8 +123,8 @@ class App extends Component {
       if(c===3){
         // row mill
         // console.log("-----R------->",this.props.App.turn,c,row);
-        this.props.dispatch({type: "MILL_ROW",val:row})
-        return row
+        this.props.dispatch({type: "MILL_ROW",val:millRow})
+        return millRow
       }
 
     }
@@ -139,7 +141,7 @@ class App extends Component {
             isInst(this.props.App.turn,this.props.App.matrix["3"][cols[col]]))
         ){
           // console.log("-----C4 Mill------->",this.props.App.turn,cols[col]);
-          this.props.dispatch({type: "MILL_COL",val:cols[col],holders:["1","2","3"]})
+          this.props.dispatch({type: "MILL_COL",val:["1","2","3"]})
           return cols[col]
         }
         else if(
@@ -147,23 +149,25 @@ class App extends Component {
             isInst(this.props.App.turn,this.props.App.matrix["6"][cols[col]]) &&
             isInst(this.props.App.turn,this.props.App.matrix["7"][cols[col]]))
         ){
-          this.props.dispatch({type: "MILL_COL",val:cols[col],holders:["5","6","7"]})
+          this.props.dispatch({type: "MILL_COL",val:["5","6","7"]})
           return cols[col]
         }
         continue
       }
       let c=0
+      let millCol=[]
       for(var row in this.props.App.matrix){
         let is=isInst(this.props.App.turn,this.props.App.matrix[row][cols[col]])
         if(is){
+          millCol[c]=row
           c++
         }
       }
       if(c===3){
         // col mill
         // console.log("-----C------->",this.props.App.turn,c,cols[col]);
-        this.props.dispatch({type: "MILL_COL",val:cols[col]})
-        return cols[col]
+        this.props.dispatch({type: "MILL_COL",val:millCol})
+        return millCol
       }
     }
 
@@ -242,11 +246,11 @@ class App extends Component {
     if(this.props.App.millRow || this.props.App.millCol || this.props.App.millDig){
       this.removeInst(evt)
     }
-    console.log(document.getElementById("playerA"));
-    if (!document.getElementById("playerA").hasChildNodes() &&
-        !document.getElementById("playerB").hasChildNodes()) {
-        console.log("now Make Moves");
-    }
+    // console.log(document.getElementById("playerA"));
+    // if (!document.getElementById("playerA").hasChildNodes() &&
+    //     !document.getElementById("playerB").hasChildNodes()) {
+    //     console.log("now Make Moves");
+    // }
 
 
   }//end of handleInst

@@ -194,7 +194,6 @@ const initialState = {
   millRow:null,
   millCol:null,
   millDig:null,
-  holders:null,
 
   playerAScore:9,
   playerBScore:9,
@@ -253,7 +252,6 @@ function App(state = initialState, action) {
       return {
         ...state,
         millRow:action.val,
-        holders:action.holders
       };
 
     case 'MILL_DIG':
@@ -277,8 +275,7 @@ function App(state = initialState, action) {
     case 'MILL_COL':
       return {
         ...state,
-        millCol:action.val,
-        holders:action.holders
+        millCol:action.val
       };
 
     case 'SHOW_LOC':
