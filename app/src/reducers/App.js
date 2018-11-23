@@ -54,6 +54,33 @@ const initialState = {
     Loc7G:"instHolder24"
   },
 
+  adjacentLocs:{
+    Loc1A:['4A','1D'],
+    Loc4A:['1A','4B','7A'],
+    Loc7A:['7D','4A'],
+    Loc2B:['4B','2D'],
+    Loc4B:['2B','4C','4A','6B'],
+    Loc6B:['4B','6D'],
+    Loc3C:['4C','3D'],
+    Loc4C:['4B','3C','5C'],
+    Loc5C:['4C','5D'],
+    Loc1D:['1A','1G','2D'],
+    Loc2D:['1D','2B','2F','3D'],
+    Loc3D:['3C','3E','2D'],
+    Loc5D:['5C','5E','6D'],
+    Loc6D:['5D','7D','6B','6F'],
+    Loc7D:['6D','7A','7G'],
+    Loc3E:['3D','4E'],
+    Loc4E:['3E','4F','5E'],
+    Loc5E:['5D','4E'],
+    Loc2F:['2D','4F'],
+    Loc4F:['2F','6F','4E','4G'],
+    Loc6F:['6D','4F'],
+    Loc1G:['1D','4G'],
+    Loc4G:['1G','4F','7G'],
+    Loc7G:['7D','4G']
+  },
+
   insts:{
     inst1:{
           width:"4%",
