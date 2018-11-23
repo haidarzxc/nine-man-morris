@@ -96,16 +96,16 @@ class App extends Component {
             isInst(this.props.App.turn,this.props.App.matrix[row]["C"]))
           ){
             // console.log("-----R4 Mill------->",this.props.App.turn,row);
-            this.props.dispatch({type: "MILL_ROW",val:["A","B","C"]})
-            return row
+            this.props.dispatch({type: "MILL_ROW",val:[row+"A",row+"B",row+"C"]})
+            return [row+"A",row+"B",row+"C"]
           }
         else if ((isInst(this.props.App.turn,this.props.App.matrix[row]["E"]) &&
          isInst(this.props.App.turn,this.props.App.matrix[row]["F"]) &&
          isInst(this.props.App.turn,this.props.App.matrix[row]["G"]))
         ){
             // console.log("-----R4 Mill------->",this.props.App.turn,row);
-            this.props.dispatch({type: "MILL_ROW",val:["E","F","G"]})
-            return row
+            this.props.dispatch({type: "MILL_ROW",val:[row+"E",row+"F",row+"G"]})
+            return [row+"E",row+"F",row+"G"]
          }
           continue
       }
@@ -115,7 +115,7 @@ class App extends Component {
         if(this.props.App.matrix[row][col]!==null){
           let is=isInst(this.props.App.turn,this.props.App.matrix[row][col])
           if(is){
-            millRow[c]=col
+            millRow[c]=row+col
             c++
           }
         }
@@ -141,16 +141,16 @@ class App extends Component {
             isInst(this.props.App.turn,this.props.App.matrix["3"][cols[col]]))
         ){
           // console.log("-----C4 Mill------->",this.props.App.turn,cols[col]);
-          this.props.dispatch({type: "MILL_COL",val:["1","2","3"]})
-          return cols[col]
+          this.props.dispatch({type: "MILL_COL",val:["1"+cols[col],"2"+cols[col],"3"+cols[col]]})
+          return ["1"+cols[col],"2"+cols[col],"3"+cols[col]]
         }
         else if(
           (isInst(this.props.App.turn,this.props.App.matrix["5"][cols[col]]) &&
             isInst(this.props.App.turn,this.props.App.matrix["6"][cols[col]]) &&
             isInst(this.props.App.turn,this.props.App.matrix["7"][cols[col]]))
         ){
-          this.props.dispatch({type: "MILL_COL",val:["5","6","7"]})
-          return cols[col]
+          this.props.dispatch({type: "MILL_COL",val:["5"+cols[col],"6"+cols[col],"7"+cols[col]]})
+          return ["5"+cols[col],"6"+cols[col],"7"+cols[col]]
         }
         continue
       }
@@ -159,7 +159,7 @@ class App extends Component {
       for(var row in this.props.App.matrix){
         let is=isInst(this.props.App.turn,this.props.App.matrix[row][cols[col]])
         if(is){
-          millCol[c]=row
+          millCol[c]=row+cols[col]
           c++
         }
       }
@@ -225,7 +225,8 @@ class App extends Component {
     }
     if(isInst(revTurn,this.props.App.instHolders[loc])){
       this.props.dispatch({ type: 'RENDER_INST' ,loc:loc,inst:false});
-      this.props.dispatch({ type: 'UPDATE_MATRIX' ,loc:loc,inst:false});
+      this.props.dispatch({ type: 'UPDATE_MATRIX' ,loc:loc,inst:null});
+      // this.props.dispatch({ type: 'REMOVE_MILL_MATRIX'});
       this.props.dispatch({type: "MILL_COL",val:null})
       this.props.dispatch({type: "MILL_ROW",val:null})
       this.props.dispatch({type: "MILL_DIG",val:null})
@@ -238,7 +239,7 @@ class App extends Component {
         this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
       }
     }
-
+    console.log("-->",this.props.App.matrix);
 
   }// end of removeInst
 
@@ -368,26 +369,11 @@ class App extends Component {
     for(var loc in this.props.App.locs){
       let stripLoc=loc.replace("Loc","")
       let labelClass
-      if(this.props.App.millRow===stripLoc[0]){
-        if(this.props.App.millRow==="4"){
-          if(this.props.App.holders.includes(stripLoc[1])){
-            labelClass="millRow"
-          }
-        }
-        else{
-          labelClass="millRow"
-        }
-
+      if(this.props.App.millRow && this.props.App.millRow.includes(stripLoc)){
+        labelClass="millRow"
       }
-      if(this.props.App.millCol===stripLoc[1]){
-        if(this.props.App.millCol==="D"){
-          if(this.props.App.holders.includes(stripLoc[0])){
+      if(this.props.App.millCol && this.props.App.millCol.includes(stripLoc)){
             labelClass="millCol"
-          }
-        }
-        else{
-          labelClass="millCol"
-        }
       }
       if(this.props.App.millDig!==null && this.props.App.millDig.includes(stripLoc)){
         labelClass="millDig"

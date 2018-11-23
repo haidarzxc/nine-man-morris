@@ -201,6 +201,14 @@ const initialState = {
 
 };
 
+const removeMill=(state,rowObj,mill)=>{
+  for(var m in mill){
+    rowObj[mill[m][1]]=rowObj[mill[m][1]]
+  }
+  // console.log("removeMill",rowObj,mill);
+  state.matrix[mill[0][0]]=rowObj
+}
+
 const setLoc=(val,state,isOn)=>{
   let locs={}
     for(var prop in state.locs){
@@ -242,7 +250,27 @@ function App(state = initialState, action) {
         }
 
       }
-      // console.log(state.matrix);
+      return {
+        ...state
+
+      };
+
+    case 'REMOVE_MILL_MATRIX':
+      console.log(state.millRow,state.millCol,state.millDig);
+      if(state.millRow){
+        let obj=state.matrix[state.millRow[0][0]]
+        removeMill(state,obj,state.millRow)
+      }
+      else if(state.millCol){
+        let obj=state.matrix[state.millCol[0][0]]
+        removeMill(state,obj,state.millCol)
+      }
+      else if(state.millDig){
+        state.matrix[state.millDig[0][0]][state.millDig[0][1]]=null
+        state.matrix[state.millDig[1][0]][state.millDig[1][1]]=null
+        state.matrix[state.millDig[2][0]][state.millDig[2][1]]=null
+      }
+
       return {
         ...state
 
