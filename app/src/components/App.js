@@ -320,10 +320,11 @@ class App extends Component {
     if(this.props.App.mill[this.props.App.storeTurn]){
       this.removeInst(evt)
     }
-    // console.log(document.getElementById("playerA"));
-    // if (!document.getElementById("playerA").hasChildNodes() &&
-    //     !document.getElementById("playerB").hasChildNodes()) {
+
+    // if (!document.getElementById("playerA").childNodes[1].hasChildNodes() &&
+    //     !document.getElementById("playerB").childNodes[1].hasChildNodes()) {
     //     console.log("now Make Moves");
+    //     this.makeMove(evt)
     // }
     // this.makeMove(evt)
 
