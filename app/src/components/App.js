@@ -88,6 +88,8 @@ function isSameMill(historyMill,mill) {
 
 
 
+
+
 class App extends Component {
   constructor(props, context) {
     super(props, context);
@@ -105,12 +107,23 @@ class App extends Component {
     this.millDiagonal=this.millDiagonal.bind(this);
     this.removeInst=this.removeInst.bind(this);
     this.handleImage=this.handleImage.bind(this);
-
+    this.checkHistoryMill=this.checkHistoryMill.bind(this);
 
 
   }// end of constructor
 
+  checkHistoryMill(historyMill,loc,turn){
+    if(historyMill.length>0){
+      for(var m in historyMill){
+        for(var l in historyMill[m]){
+          if(historyMill[m]!==undefined && historyMill[m][l] === loc.replace("Loc",""))
+            // console.log("checkHistoryMill ",loc);
+            this.props.dispatch({type: "REMOVE_FROM_HISTORY_MILL",idx:m,turn:turn})
+        }
+      }
+    }
 
+  }
 
   millRows(){
     for(var row in this.props.App.matrix){
@@ -280,6 +293,7 @@ class App extends Component {
       this.props.dispatch({ type: 'HISTORY_MILL'});
       this.props.dispatch({ type: 'RESET_MILL',val:null});
       this.props.dispatch({type: "UPDATE_SOCRE",player:revTurn})
+      this.checkHistoryMill(this.props.App.historyMill[revTurn],loc,revTurn)
       this.props.dispatch({ type: 'SET_TURN',val:revTurn});
       if(revTurn===0){
         this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
@@ -310,7 +324,7 @@ class App extends Component {
     let row=this.millRows()
     let col=this.millColumns()
     let dig=this.millDiagonal()
-    console.log("mills",row,col,dig,this.props.App.historyMill,this.props.App.mill);
+    // console.log("mills",row,col,dig,this.props.App.historyMill,this.props.App.mill);
 
 
     if((row || col || dig)){
@@ -351,7 +365,7 @@ class App extends Component {
       }
       catch(err){
       }
-      console.log("NEW MOVE",this.props.App.matrix);
+      // console.log("NEW MOVE",this.props.App.matrix);
       this.props.dispatch({type: "UPDATE_MATRIX",inst:this.props.App.inst,loc:event.target.id})
       let mill=this.mills()
       // console.log("mill",mill);

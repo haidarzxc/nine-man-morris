@@ -264,6 +264,15 @@ function App(state = initialState, action) {
 
       };
 
+    case 'REMOVE_FROM_HISTORY_MILL':
+      console.log("before",state.historyMill[action.turn],action.turn);
+      state.historyMill[action.turn].splice(action.idx, 1);
+      console.log("after",state.historyMill[action.turn]);
+      return {
+        ...state,
+
+      };
+
 
     case 'UPDATE_SOCRE':
       if(action.player===0){
