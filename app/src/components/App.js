@@ -64,10 +64,22 @@ function isInst(player,inst){
 }
 
 function isSameMill(historyMill,mill) {
-    if(historyMill!==null){
-      for(var loc in historyMill){
-        if(historyMill[loc] !== mill[loc])
-            return false;
+    if(historyMill.length>0){
+      let c=0
+      let f=true
+      for(var m in historyMill){
+        // console.log('->hist',historyMill[m],"->curr Mil",mill);
+        for(var loc in historyMill[m]){
+          if(historyMill[m][loc] !== mill[loc])
+            f=false
+        }
+        if(f===false){
+            f=true
+            c++
+        }
+      }
+      if(c===historyMill.length){
+        return false
       }
       return true;
     }
@@ -164,7 +176,7 @@ class App extends Component {
             isSameMill(this.props.App.historyMill[this.props.App.turn],
               ["1"+cols[col],"2"+cols[col],"3"+cols[col]])===false
         ){
-          console.log("-----C4 Mill------->",this.props.App.turn,cols[col]);
+          // console.log("-----C4 Mill------->",this.props.App.turn,cols[col]);
           // this.props.dispatch({type: "MILL_COL",val:["1"+cols[col],"2"+cols[col],"3"+cols[col]]})
           this.props.dispatch({ type: 'SET_MILL',val:["1"+cols[col],"2"+cols[col],"3"+cols[col]]});
           return ["1"+cols[col],"2"+cols[col],"3"+cols[col]]
@@ -177,7 +189,7 @@ class App extends Component {
               ["5"+cols[col],"6"+cols[col],"7"+cols[col]])===false
         ){
           // this.props.dispatch({type: "MILL_COL",val:["5"+cols[col],"6"+cols[col],"7"+cols[col]]})
-          console.log("-----C4 Mill------->",this.props.App.turn,cols[col]);
+          // console.log("-----C4 Mill------->",this.props.App.turn,cols[col]);
           this.props.dispatch({ type: 'SET_MILL',val:["5"+cols[col],"6"+cols[col],"7"+cols[col]]});
           return ["5"+cols[col],"6"+cols[col],"7"+cols[col]]
         }
@@ -299,7 +311,7 @@ class App extends Component {
     let col=this.millColumns()
     let dig=this.millDiagonal()
     console.log("mills",row,col,dig,this.props.App.historyMill,this.props.App.mill);
-    
+
 
     if((row || col || dig)){
       this.props.dispatch({ type: 'STORE_TURN',val:-1});
@@ -339,10 +351,10 @@ class App extends Component {
       }
       catch(err){
       }
-
+      console.log("NEW MOVE",this.props.App.matrix);
       this.props.dispatch({type: "UPDATE_MATRIX",inst:this.props.App.inst,loc:event.target.id})
       let mill=this.mills()
-      console.log("mill",mill);
+      // console.log("mill",mill);
       if(mill===-1){
         this.props.dispatch({type: "SET_INST",inst:null})
         return
@@ -408,9 +420,10 @@ class App extends Component {
       let stripLoc=loc.replace("Loc","")
       let labelClass
       if(this.props.App.mill[this.props.App.storeTurn] &&
-        this.props.App.mill[this.props.App.storeTurn].includes(stripLoc)){
-          console.log("-->> ",this.props.App.mill[this.props.App.storeTurn]);
+        this.props.App.mill[this.props.App.storeTurn].includes(stripLoc)
+      ){
         labelClass="millRow"
+
       }
 
 
@@ -420,7 +433,7 @@ class App extends Component {
         this.props.App.historyMill[this.props.App.storeTurn] &&
         this.props.App.mill[this.props.App.storeTurn] &&
         isSameMill(this.props.App.historyMill[this.props.App.storeTurn],
-          this.props.App.historyMill[this.props.App.storeTurn])===true){
+          this.props.App.mill[this.props.App.storeTurn])===true){
         labelClass=""
       }
 

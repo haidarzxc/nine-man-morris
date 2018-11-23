@@ -192,7 +192,7 @@ const initialState = {
     "7":{"A":null, "B":null, "C":null, "D":null, "E":null, "F":null, "G":null},
   },
   mill:{"0":null,"1":null},
-  historyMill:{"0":null,"1":null},
+  historyMill:{"0":[],"1":[]},
 
   playerAScore:9,
   playerBScore:9,
@@ -258,7 +258,7 @@ function App(state = initialState, action) {
       };
 
     case 'HISTORY_MILL':
-      state.historyMill[state.storeTurn]=state.mill[state.storeTurn]
+      state.historyMill[state.storeTurn].push(state.mill[state.storeTurn])
       return {
         ...state,
 
