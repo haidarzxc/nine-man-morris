@@ -383,6 +383,12 @@ class App extends Component {
   }
 
   handleBoardInst(event){
+    console.log("--->",this.props.App.turn);
+    if(this.isBotTurn(this.props.App.turn)){
+      this.bot()
+      return
+    }
+
     if(this.props.App.inst!==null){
       this.props.dispatch({ type: 'RENDER_INST' ,loc:event.target.id,inst:this.props.App.inst});
       try{
@@ -398,13 +404,22 @@ class App extends Component {
         this.props.dispatch({type: "SET_INST",inst:null})
         return
       }
+
       if(this.props.App.turn===0){
         this.props.dispatch({ type: 'SET_TURN',val:1});
+        if(this.isBotTurn(1)){
+          this.bot()
+          return
+        }
         this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
         this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
       }
       else if(this.props.App.turn===1){
         this.props.dispatch({ type: 'SET_TURN',val:0});
+        if(this.isBotTurn(0)){
+          this.bot()
+          return
+        }
         this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
         this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
       }
@@ -517,8 +532,6 @@ class App extends Component {
 
 
   render() {
-
-    console.log(this.props.App.bot);
 
     let content=[]
     let c=0
