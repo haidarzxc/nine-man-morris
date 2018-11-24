@@ -542,7 +542,6 @@ class App extends Component {
 
 
     }
-
     return (
 
       <Row className="Row1">
@@ -550,6 +549,7 @@ class App extends Component {
 
 
           <div id="div1">
+            <div className={this.props.App.mill[this.props.App.storeTurn]?"mill":"hideMill"}>Mill!</div>
             <Image src={board} responsive className="board"/>
 
             {content}

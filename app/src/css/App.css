@@ -384,3 +384,20 @@
   border-style: dashed;
   border-color: green;
 }
+
+.mill{
+  position: absolute;
+  top: 214px;
+  left: 208px;
+  z-index:1;
+  transform-style: preserve-3d;
+  transform: rotateX(50deg) rotateY(0deg) rotateZ(0deg);
+  font-size: 35pt;
+  color:red;
+
+}
+
+.hideMill{
+  position: absolute;
+  display: none;
+}
