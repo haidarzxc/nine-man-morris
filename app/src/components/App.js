@@ -313,7 +313,7 @@ class App extends Component {
         loc=key
       }
     }
-    this.props.dispatch({ type: 'Label_MOVES',locs:this.props.App.adjacentLocs[loc]});
+    this.props.dispatch({ type: 'Label_MOVES',locs:this.props.App.adjacentLocs[loc],loc:loc});
   }
 
   handleImage(evt){
@@ -321,11 +321,12 @@ class App extends Component {
       this.removeInst(evt)
     }
 
-    // if (!document.getElementById("playerA").childNodes[1].hasChildNodes() &&
-    //     !document.getElementById("playerB").childNodes[1].hasChildNodes()) {
-    //     console.log("now Make Moves");
-    //     this.makeMove(evt)
-    // }
+    if (!document.getElementById("playerA").childNodes[1].hasChildNodes() &&
+        !document.getElementById("playerB").childNodes[1].hasChildNodes() &&
+        !this.props.App.mill[this.props.App.storeTurn]) {
+        // console.log("now Make Moves");
+        this.makeMove(evt)
+    }
     // this.makeMove(evt)
 
 
@@ -401,6 +402,38 @@ class App extends Component {
       this.props.dispatch({type: "SET_INST",inst:null})
 
     }
+    else if(this.props.App.labelMoves &&
+      !this.props.App.mill[this.props.App.storeTurn]
+      && isInst(this.props.App.turn,this.props.App.matrix[this.props.App.labelMoves["loc"].replace("Loc","")[0]][this.props.App.labelMoves["loc"].replace("Loc","")[1]])){
+
+      // console.log("in block labelMoves",this.props.App.matrix,this.props.App.instHolders);
+      let stripLoc=this.props.App.labelMoves["loc"].replace("Loc","")
+      this.props.dispatch({ type: 'RENDER_INST' ,loc:event.target.id,inst:this.props.App.matrix[stripLoc[0]][stripLoc[1]]});
+      this.props.dispatch({ type: 'RENDER_INST' ,loc:this.props.App.labelMoves["loc"],inst:false});
+      this.props.dispatch({type: "UPDATE_MATRIX",inst:this.props.App.matrix[stripLoc[0]][stripLoc[1]],loc:event.target.id})
+      this.props.dispatch({type: "UPDATE_MATRIX",inst:null,loc:this.props.App.labelMoves["loc"]})
+      this.props.dispatch({ type: 'Label_MOVES',locs:null,loc:null});
+
+      this.checkHistoryMill(this.props.App.historyMill[this.props.App.turn],event.target.id.replace("Loc",""),this.props.App.turn)
+      let mill=this.mills()
+      // console.log("MOVE BLOCK mill",mill,this.props.App.historyMill,this.props.App.turn);
+      if(mill===-1){
+        this.props.dispatch({type: "SET_INST",inst:null})
+        return
+      }
+      if(this.props.App.turn===0){
+        this.props.dispatch({ type: 'SET_TURN',val:1});
+        this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
+        this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
+      }
+      else if(this.props.App.turn===1){
+        this.props.dispatch({ type: 'SET_TURN',val:0});
+        this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
+        this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
+      }
+
+      this.props.dispatch({type: "SET_INST",inst:null})
+    }
   }
 
   HandleGameStart(evt){
@@ -455,9 +488,11 @@ class App extends Component {
       }
 
       if(this.props.App.labelMoves &&
-      this.props.App.labelMoves.includes(stripLoc) &&
-      this.props.App.matrix[stripLoc[0]][stripLoc[1]]===null){
-        labelClass="millRow"
+        this.props.App.labelMoves["locs"] &&
+        this.props.App.labelMoves["locs"].includes(stripLoc) &&
+        isInst(this.props.App.turn,this.props.App.matrix[this.props.App.labelMoves["loc"].replace("Loc","")[0]][this.props.App.labelMoves["loc"].replace("Loc","")[1]]) &&
+        this.props.App.matrix[stripLoc[0]][stripLoc[1]]===null){
+          labelClass="millRow"
       }
 
 
@@ -470,6 +505,14 @@ class App extends Component {
           this.props.App.mill[this.props.App.storeTurn])===true){
         labelClass=""
       }
+
+      // let func=null
+      // if(this.props.App.instHolders[loc]===false){
+      //   func=this.handleBoardInst
+      // }
+      // else if(this.props.App.labelMoves){
+      //   console.log("func labelMoves");
+      // }
 
       c++
       content.push(

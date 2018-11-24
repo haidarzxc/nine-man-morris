@@ -298,7 +298,7 @@ function App(state = initialState, action) {
       };
 
     case 'Label_MOVES':
-      state.labelMoves=action.locs
+      state.labelMoves={"loc":action.loc,"locs":action.locs}
       return {
         ...state,
       };
