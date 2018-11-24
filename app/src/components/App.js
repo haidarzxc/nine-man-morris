@@ -542,9 +542,20 @@ class App extends Component {
 
 
     }
+    let terminateContent=null
+    let terminateClass="hideTerminateLabel"
+    if(this.props.App.playerAScore<3){
+      terminateContent="PlayerB Won"
+      terminateClass="terminateLabel"
+    }
+    else if(this.props.App.playerBScore<3){
+      terminateContent="PlayerA Won"
+      terminateClass="terminateLabel"
+    }
     return (
 
       <Row className="Row1">
+        <div className={terminateClass}>{terminateContent}</div>
         <Col xs={6} md={6} className="ColBoard">
 
 

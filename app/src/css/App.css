@@ -401,3 +401,19 @@
   position: absolute;
   display: none;
 }
+
+.terminateLabel{
+  position: absolute;
+  top: 83px;
+  left: 306px;
+  z-index:1;
+  font-size: 25pt;
+}
+
+.hideTerminateLabel{
+  position: absolute;
+  top: 83px;
+  left: 352px;
+  z-index:1;
+  font-size: 25pt;
+}
