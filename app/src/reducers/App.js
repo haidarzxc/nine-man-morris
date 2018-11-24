@@ -224,6 +224,7 @@ const initialState = {
   playerAScore:9,
   playerBScore:9,
   labelMoves:null,
+  isBot:false,
 
 
 };
@@ -374,6 +375,12 @@ function App(state = initialState, action) {
       return {
         ...state,
         inst:action.inst
+      };
+
+    case 'IS_BOT':
+      return {
+        ...state,
+        isBot:action.val
       };
 
     default:

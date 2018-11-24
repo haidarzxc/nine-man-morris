@@ -7,7 +7,8 @@ import {
   Row,
   Col,
   Button,
-  Badge} from "react-bootstrap"
+  Badge,
+  Checkbox} from "react-bootstrap"
 
 import { connect  } from 'react-redux';
 
@@ -109,9 +110,15 @@ class App extends Component {
     this.handleImage=this.handleImage.bind(this);
     this.checkHistoryMill=this.checkHistoryMill.bind(this);
     this.makeMove=this.makeMove.bind(this);
+    this.HandleCheckbox=this.HandleCheckbox.bind(this);
 
 
   }// end of constructor
+
+
+  HandleCheckbox(evt){
+    this.props.dispatch({ type: 'IS_BOT',val:evt.target.checked});
+  }
 
   checkHistoryMill(historyMill,loc,turn){
     if(historyMill.length>0){
@@ -574,6 +581,7 @@ class App extends Component {
 
             <ListGroupItem header="Game Status." bsStyle="danger">
             <Button bsStyle="primary" onClick={this.HandleGameStart}>Start Game</Button><br/>
+            <Checkbox onChange={this.HandleCheckbox} inline>Play Against bot</Checkbox><br/>
             <span>player A score: <Badge>{this.props.App.playerAScore}</Badge></span> |
             <span>player B score: <Badge>{this.props.App.playerBScore}</Badge></span>
 
