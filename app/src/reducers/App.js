@@ -309,7 +309,7 @@ function App(state = initialState, action) {
         state.playerAScore=state.playerAScore-1
       }
       else if(action.player===1){
-        state.playerBScore=state.playerAScore-1
+        state.playerBScore=state.playerBScore-1
       }
       return {
         ...state
