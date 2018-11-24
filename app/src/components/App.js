@@ -111,6 +111,9 @@ class App extends Component {
     this.checkHistoryMill=this.checkHistoryMill.bind(this);
     this.makeMove=this.makeMove.bind(this);
     this.HandleCheckbox=this.HandleCheckbox.bind(this);
+    this.bot=this.bot.bind(this);
+    this.isBotTurn=this.isBotTurn.bind(this);
+
 
 
   }// end of constructor
@@ -360,11 +363,11 @@ class App extends Component {
 
 
   handleInst(event){
-    if(this.props.App.turn===0 && isInst(0,event.target.id)){
+    if(this.props.App.turn===0 && isInst(0,event.target.id) && !this.isBotTurn(this.props.App.turn)){
       this.props.dispatch({type: "SET_INST",inst:event.target.id})
       this.props.dispatch({type: "HIGHLIGHT_MAN",inst:event.target.id})
     }
-    else if(this.props.App.turn===1 && isInst(1,event.target.id)){
+    else if(this.props.App.turn===1 && isInst(1,event.target.id) && !this.isBotTurn(this.props.App.turn)){
       this.props.dispatch({type: "SET_INST",inst:event.target.id})
       this.props.dispatch({type: "HIGHLIGHT_MAN",inst:event.target.id})
     }
@@ -446,14 +449,36 @@ class App extends Component {
   HandleGameStart(evt){
     let rand=Math.floor(Math.random() * (2 - 0) );
     this.props.dispatch({ type: 'SET_TURN',val:rand});
-    if(rand===0){
-      this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
-      this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
+
+    if(this.props.App.isBot===false){
+      if(rand===0){
+        this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
+        this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
+      }
+      else if(rand===1){
+        this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
+        this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
+      }
     }
-    else if(rand===1){
-      this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
-      this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
+    else if(this.props.App.isBot===true){
+      let botRand=Math.floor(Math.random() * (2 - 0) );
+      this.props.dispatch({ type: 'SET_BOT',val:botRand});
+      if(botRand===rand){
+        this.bot()
+      }
+      else{
+        if(rand===0){
+          this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
+          this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
+        }
+        else if(rand===1){
+          this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
+          this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
+        }
+      }
     }
+
+
   }
 
   resolveImage(inst){
@@ -477,10 +502,24 @@ class App extends Component {
     else if(inst==="inst18"){return inst18}
   }
 
+  isBotTurn(turn){
+    if(this.props.App.bot===turn){
+      return true
+    }
+    return false
+  }
+
+  bot(){
+    console.log("bot");
+  }
+
 
 
 
   render() {
+
+    console.log(this.props.App.bot);
+
     let content=[]
     let c=0
 
@@ -513,13 +552,6 @@ class App extends Component {
         labelClass=""
       }
 
-      // let func=null
-      // if(this.props.App.instHolders[loc]===false){
-      //   func=this.handleBoardInst
-      // }
-      // else if(this.props.App.labelMoves){
-      //   console.log("func labelMoves");
-      // }
 
       c++
       content.push(
@@ -587,7 +619,7 @@ class App extends Component {
 
             </ListGroupItem>
 
-            <ListGroupItem id="playerA" className={this.props.App.highlightPA? "highlightPAON":"highlightPAOFF"} header="Player A">
+            <ListGroupItem id="playerA" className={this.props.App.highlightPA && !this.isBotTurn(this.props.App.turn)? "highlightPAON":"highlightPAOFF"} header="Player A">
 
               <Image src={inst1} className={this.props.App.highlightInst==="inst1"? "HighlightInst":null}  width="6%" id="inst1" onClick={this.handleInst}/>
               <Image src={inst2} className={this.props.App.highlightInst==="inst2"? "HighlightInst":null}  width="10%" id="inst2" onClick={this.handleInst}/>
@@ -602,7 +634,7 @@ class App extends Component {
             </ListGroupItem>
 
 
-          <ListGroupItem id="playerB" className={this.props.App.highlightPB? "highlightPBON":"highlightPBOFF"} header="Player B">
+          <ListGroupItem id="playerB" className={this.props.App.highlightPB && !this.isBotTurn(this.props.App.turn)? "highlightPBON":"highlightPBOFF"} header="Player B">
 
             <Image src={inst10} className={this.props.App.highlightInst==="inst10"? "HighlightInst":null}  width="14%" id="inst10" onClick={this.handleInst}/>
             <Image src={inst11} className={this.props.App.highlightInst==="inst11"? "HighlightInst":null} width="13%" id="inst11" onClick={this.handleInst}/>

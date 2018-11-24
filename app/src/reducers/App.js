@@ -225,6 +225,7 @@ const initialState = {
   playerBScore:9,
   labelMoves:null,
   isBot:false,
+  bot:null,
 
 
 };
@@ -381,6 +382,12 @@ function App(state = initialState, action) {
       return {
         ...state,
         isBot:action.val
+      };
+
+    case 'SET_BOT':
+      return {
+        ...state,
+        bot:action.val
       };
 
     default:
