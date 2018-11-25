@@ -113,6 +113,9 @@ class App extends Component {
     this.HandleCheckbox=this.HandleCheckbox.bind(this);
     this.bot=this.bot.bind(this);
     this.isBotTurn=this.isBotTurn.bind(this);
+    this.isThereInsts=this.isThereInsts.bind(this);
+    this.botPlay=this.botPlay.bind(this);
+
 
 
 
@@ -385,7 +388,7 @@ class App extends Component {
   handleBoardInst(event){
     console.log("--->",this.props.App.turn);
     if(this.isBotTurn(this.props.App.turn)){
-      this.bot()
+      this.bot(this.props.App.turn)
       return
     }
 
@@ -408,7 +411,7 @@ class App extends Component {
       if(this.props.App.turn===0){
         this.props.dispatch({ type: 'SET_TURN',val:1});
         if(this.isBotTurn(1)){
-          this.bot()
+          this.bot(1)
           return
         }
         this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
@@ -417,7 +420,7 @@ class App extends Component {
       else if(this.props.App.turn===1){
         this.props.dispatch({ type: 'SET_TURN',val:0});
         if(this.isBotTurn(0)){
-          this.bot()
+          this.bot(0)
           return
         }
         this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
@@ -479,7 +482,7 @@ class App extends Component {
       let botRand=Math.floor(Math.random() * (2 - 0) );
       this.props.dispatch({ type: 'SET_BOT',val:botRand});
       if(botRand===rand){
-        this.bot()
+        this.bot(botRand)
       }
       else{
         if(rand===0){
@@ -524,15 +527,30 @@ class App extends Component {
     return false
   }
 
-  bot(){
-    console.log("bot");
+  isThereInsts(turn){
+    if(turn===0 && document.getElementById("playerA").childNodes[1].hasChildNodes()){
+      return true
+    }
+    else if(turn===1 && document.getElementById("playerB").childNodes[1].hasChildNodes()){
+      return true
+    }
+    return false
+  }
+
+  botPlay(){
+    console.log("botPlay");
+  }
+
+  bot(turn){
+    if(this.isThereInsts(turn)){
+      this.botPlay()
+    }
   }
 
 
 
 
   render() {
-
     let content=[]
     let c=0
 
