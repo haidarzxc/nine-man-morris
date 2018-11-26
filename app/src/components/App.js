@@ -115,6 +115,9 @@ class App extends Component {
     this.isBotTurn=this.isBotTurn.bind(this);
     this.isThereInsts=this.isThereInsts.bind(this);
     this.botPlay=this.botPlay.bind(this);
+    this.resolveBoard=this.resolveBoard.bind(this);
+    this.getInst=this.getInst.bind(this);
+
 
 
 
@@ -386,7 +389,7 @@ class App extends Component {
   }
 
   handleBoardInst(event){
-    console.log("--->",this.props.App.turn);
+    // console.log("--->",this.props.App.turn);
     if(this.isBotTurn(this.props.App.turn)){
       this.bot(this.props.App.turn)
       return
@@ -537,13 +540,57 @@ class App extends Component {
     return false
   }
 
-  botPlay(){
+  getInst(turn){
+    if(turn===0){
+      return document.getElementById("playerA").childNodes[1].firstChild.id
+    }
+    else if(turn===1){
+      return document.getElementById("playerB").childNodes[1].firstChild.id
+    }
+  }
+
+  resolveBoard(board,turn){
+    for(var row in board){
+      for(var col in board[row]){
+        if(board[row][col]===null){
+          console.log(row+col);
+          board[row][col]=this.getInst(turn)
+          return board
+        }
+        else{
+          console.log(row+col);
+          let adjacentLocs=this.props.App.adjacentLocs["Loc"+row+col]
+          board[adjacentLocs[0][0]][adjacentLocs[0][1]]=this.getInst(turn)
+          return board
+        }
+
+      }
+    }
+  }
+
+  botPlay(botTurn){
     console.log("botPlay");
+    // get existing board
+    let board=this.props.App.matrix
+    let turn=botTurn
+    for(var m=0; m<this.props.App.movesAhead; m++){
+
+      board=this.resolveBoard(board,turn)
+      if(turn===0){
+        turn=1
+      }
+      else{
+        turn=0
+      }
+      console.log(board);
+
+    }
+
   }
 
   bot(turn){
     if(this.isThereInsts(turn)){
-      this.botPlay()
+      this.botPlay(turn)
     }
   }
 
