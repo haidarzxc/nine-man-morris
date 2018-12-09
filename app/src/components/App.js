@@ -563,22 +563,26 @@ class App extends Component {
   resolveBoard(board,turn){
     for(var row in board){
       for(var col in board[row]){
-        if(board[row][col]===null){
-
-          board[row][col]=this.getInst(turn)
-          console.log("resolveBoard: null block",(row+col+""),this.getInst(turn));
-          return board
+        if(!Object.keys(this.props.App.locs).includes("Loc"+row+col)){
+          continue
         }
-        else{
+
+        if(board[row][col]!==null){
+
+          // board[row][col]=this.getInst(turn)
+          // console.log("resolveBoard: null block",(row+col+""),this.getInst(turn));
           let adjacentLocs=this.props.App.adjacentLocs["Loc"+row+col]
           for(var adj in adjacentLocs){
               if(board[adjacentLocs[adj][0]][adjacentLocs[adj][1]]===null){
                 board[adjacentLocs[adj][0]][adjacentLocs[adj][1]]=this.getInst(turn)
-                console.log("resolveBoard: NOT null block",("Loc"+row+col),adjacentLocs[adj],this.getInst(turn));
+                // console.log("resolveBoard: NOT null block",("Loc"+row+col),adjacentLocs[adj],this.getInst(turn));
                 return board
               }
           }
-
+        }
+        else{
+          board[row][col]=this.getInst(turn)
+          return board
         }
 
       }
@@ -588,11 +592,21 @@ class App extends Component {
   botPlay(botTurn){
     console.log("botPlay");
     // get existing board
-    let board=this.props.App.matrix
+    let board=JSON.parse(JSON.stringify(this.props.App.matrix))
     let turn=botTurn
+    let historyMill={"0":[],"1":[]}
+    let row
+    let col
+    let dig
     for(var m=0; m<this.props.App.movesAhead; m++){
 
       board=this.resolveBoard(board,turn)
+      row=this.millRows(board,turn,historyMill)
+      col=this.millColumns(board,turn,historyMill)
+      dig=this.millDiagonal(board,turn,historyMill)
+      if(row || col || dig){
+        break
+      }
       if(turn===0){
         turn=1
       }
@@ -602,7 +616,59 @@ class App extends Component {
 
 
     }
-    console.log(board);
+    console.log(board,botTurn,this.props.App.matrix);
+    let loc="Loc"
+    let inst=this.getInst(botTurn)
+    if(row){
+      for(var r in row){
+        if(this.props.App.matrix[row[r][0]][row[r][1]]===null){
+          loc+=row[r]
+        }
+        break
+      }
+    }
+    if(col){
+      for(var c in col){
+        if(this.props.App.matrix[col[c][0]][col[c][1]]===null){
+          loc+=col[c]
+        }
+        break
+      }
+    }
+    if(dig){
+      for(var d in dig){
+        if(this.props.App.matrix[dig[d][0]][dig[d][1]]===null){
+          loc+=dig[d]
+        }
+        break
+      }
+    }
+    console.log(loc,inst);
+    // -------------------------------------------------------------
+    this.props.dispatch({ type: 'RENDER_INST' ,loc:loc,inst:inst});
+    try{
+      document.getElementById(inst).remove()
+    }
+    catch(err){
+    }
+    this.props.dispatch({type: "UPDATE_MATRIX",inst:inst,loc:loc})
+    let mill=this.mills()
+    // console.log("BOT mill",mill);
+    if(mill===-1){
+      this.props.dispatch({type: "SET_INST",inst:null})
+      return
+    }
+    if(botTurn===0){
+      this.props.dispatch({ type: 'SET_TURN',val:1});
+      this.props.dispatch({ type: 'HIGHLIGHT_PA',val:false});
+      this.props.dispatch({ type: 'HIGHLIGHT_PB',val:true});
+    }
+    else if(botTurn===1){
+      this.props.dispatch({ type: 'SET_TURN',val:0});
+      this.props.dispatch({ type: 'HIGHLIGHT_PA',val:true});
+      this.props.dispatch({ type: 'HIGHLIGHT_PB',val:false});
+    }
+    // -------------------------------------------------------------
 
   }
 
