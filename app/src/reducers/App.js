@@ -226,7 +226,7 @@ const initialState = {
   labelMoves:null,
   isBot:false,
   bot:null,
-  movesAhead:15
+  movesAhead:4
 
 
 };
