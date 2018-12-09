@@ -435,8 +435,10 @@ class App extends Component {
     }
     else if(this.props.App.labelMoves &&
       !this.props.App.mill[this.props.App.storeTurn]
-      && isInst(this.props.App.turn,this.props.App.matrix[this.props.App.labelMoves["loc"].replace("Loc","")[0]][this.props.App.labelMoves["loc"].replace("Loc","")[1]])){
-
+      && isInst(this.props.App.turn,this.props.App.matrix[this.props.App.labelMoves["loc"].replace("Loc","")[0]][this.props.App.labelMoves["loc"].replace("Loc","")[1]])
+      && this.props.App.labelMoves["locs"].includes(event.target.id.replace("Loc","")))
+      {
+        
       // console.log("in block labelMoves",this.props.App.matrix,this.props.App.instHolders);
       let stripLoc=this.props.App.labelMoves["loc"].replace("Loc","")
       this.props.dispatch({ type: 'RENDER_INST' ,loc:event.target.id,inst:this.props.App.matrix[stripLoc[0]][stripLoc[1]]});
@@ -553,12 +555,12 @@ class App extends Component {
     for(var row in board){
       for(var col in board[row]){
         if(board[row][col]===null){
-          console.log(row+col);
+          // console.log(row+col);
           board[row][col]=this.getInst(turn)
           return board
         }
         else{
-          console.log(row+col);
+          // console.log(row+col);
           let adjacentLocs=this.props.App.adjacentLocs["Loc"+row+col]
           board[adjacentLocs[0][0]][adjacentLocs[0][1]]=this.getInst(turn)
           return board
@@ -582,7 +584,7 @@ class App extends Component {
       else{
         turn=0
       }
-      console.log(board);
+      // console.log(board);
 
     }
 
