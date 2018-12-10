@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "alphabeta": "^1.0.2",
     "classnames": "^2.2.6",
     "react": "^16.6.0",
     "react-bootstrap": "^0.32.4",

@@ -116,6 +116,7 @@ class App extends Component {
     this.isThereInsts=this.isThereInsts.bind(this);
     this.botPlay=this.botPlay.bind(this);
     this.resolveBoard=this.resolveBoard.bind(this);
+    this.iter=this.iter.bind(this);
     this.getInst=this.getInst.bind(this);
 
 
@@ -564,16 +565,37 @@ class App extends Component {
     }
   }
 
-  resolveBoard(board,turn){
-
+  iter(board,loc,turn){
     for(var row in board){
       for(var col in board[row]){
         if(!Object.keys(this.props.App.locs).includes("Loc"+row+col)){
           continue
         }
 
+        if("Loc"+row+col===loc){
+          board[row][col]=this.getInst(turn)
+          return board
+        }
+        // console.log(row+col);
+
 
       }
+    }
+  }
+
+  resolveBoard(board,turn,botTurn){
+    if(turn===botTurn){
+      console.log("maxi-mize");
+      for(var i in this.props.App.locs){
+        this.iter(board,i,turn)
+
+
+      }
+      console.log(board);
+
+    }
+    else{
+      console.log("Mini-mize");
     }
   }
 
@@ -587,8 +609,7 @@ class App extends Component {
     // let col
     // let dig
     for(var m=0; m<this.props.App.movesAhead; m++){
-      console.log(turn);
-      board=this.resolveBoard(board,turn)
+      board=this.resolveBoard(board,turn,botTurn)
       // row=this.millRows(board,turn,historyMill)
       // col=this.millColumns(board,turn,historyMill)
       // dig=this.millDiagonal(board,turn,historyMill)
